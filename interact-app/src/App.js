@@ -20,13 +20,21 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Router>
-          <Switch>
-            <Route path='/home' component={Home} />
-            <Route path='/userRecipes' component={userRecipes} />
-            <Route path='/Recipes' component={Recipes} />
-            <Route path='/Account' component={Account} />
-            <Route path='/signIn' component={signIn} />
-          </Switch>
+          <div className="container">
+            <Link to="/home">Home</Link>
+            {' '}
+            <Link to="/userRecipes">My Recipes</Link>
+            {' '}
+            <Link to="/Recipes">Explore</Link>
+            {' '}
+            <Link to="/Account">Account</Link>
+            <Switch>
+              <Route path='/home' component={Home} />
+              <Route path='/userRecipes' component={userRecipes} />
+              <Route path='/Recipes' component={Recipes} />
+              <Route path='/Account' component={Account} />
+            </Switch>
+          </div>
         </Router>
       </div>
     );
