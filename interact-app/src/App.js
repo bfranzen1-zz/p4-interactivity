@@ -11,14 +11,7 @@ import Account from './pages/account.jsx';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
         <Router>
           <div className="container">
             <Link to="/home">Home</Link>
@@ -28,12 +21,10 @@ class App extends Component {
             <Link to="/Recipes">Explore</Link>
             {' '}
             <Link to="/Account">Account</Link>
-            <Switch>
               <Route path='/home' component={Home} />
               <Route path='/userRecipes' component={userRecipes} />
               <Route path='/Recipes' component={Recipes} />
               <Route path='/Account' component={Account} />
-            </Switch>
           </div>
         </Router>
       </div>
