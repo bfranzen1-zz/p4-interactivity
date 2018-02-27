@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import Home from './pages/home.jsx';
-import userRecipes from './pages/userRecipes.jsx';
+import UserRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
 import Account from './pages/account.jsx';
 import firebase from 'firebase';
@@ -76,22 +76,23 @@ class App extends Component {
                 <div>
                     <Router>
                         <div className="container">
-                            <Link to="/home">Home</Link>
+                            <Link to="/">Home</Link>
                             {' '}
                             <Link to="/userRecipes">My Recipes</Link>
                             {' '}
                             <Link to="/Recipes">Explore</Link>
                             {' '}
                             <Link to="/Account">Account</Link>
-                            <Route path='/home' component={Home} />
-                            <Route path='/userRecipes' component={userRecipes} />
-                            <Route path='/Recipes' component={Recipes} />
-                            <Route path='/Account' component={Account} />
+                            {' '}
+                            <button className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
+                                Sign Out
+                            </button>
+                            <Route exact path='/' render={() => <Home user={this.state.user} />} />
+                            <Route path='/userRecipes' render={() => <UserRecipes user={this.state.user} />} />
+                            <Route path='/Recipes' render={() => <Recipes user={this.state.user} />} />
+                            <Route path='/Account' render={() => <Account user={this.state.user} />} />
                         </div>
                     </Router>
-                    <button className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
-                        Sign Out
-                </button>
                 </div>
             }
             {!this.state.user &&
