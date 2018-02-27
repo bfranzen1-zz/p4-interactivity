@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { HashRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import Home from './pages/home.jsx';
 import userRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
@@ -76,23 +76,22 @@ class App extends Component {
                 <div>
                     <Router>
                         <div className="container">
-                            <Link to="/">Home</Link>
+                            <Link to="/home">Home</Link>
                             {' '}
                             <Link to="/userRecipes">My Recipes</Link>
                             {' '}
                             <Link to="/Recipes">Explore</Link>
                             {' '}
                             <Link to="/Account">Account</Link>
-                            {' '}
-                            <button className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
-                                Sign Out
-                            </button>
-                            <Route exact path='/' render={() => <Home user={this.state.user} />} />
-                            <Route path='/userRecipes' render={() => <userRecipes user={this.state.user} />} />
-                            <Route path='/Recipes' render={() => <Recipes user={this.state.user} />} />
-                            <Route path='/Account' render={() => <Account user={this.state.user} />} />
+                            <Route path='/home' component={Home} />
+                            <Route path='/userRecipes' component={userRecipes} />
+                            <Route path='/Recipes' component={Recipes} />
+                            <Route path='/Account' component={Account} />
                         </div>
                     </Router>
+                    <button className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
+                        Sign Out
+                </button>
                 </div>
             }
             {!this.state.user &&
@@ -127,11 +126,10 @@ class App extends Component {
                     <div className="form-group">
                         <button className="btn btn-primary mr-2" onClick={() => this.onSignUp()}>
                             Sign Up
-                        </button>
-
+             </button>
                         <button className="btn btn-success mr-2" onClick={() => this.onSignIn()}>
                             Sign In
-                        </button>
+            </button>
                     </div>
                 </div>
             }
