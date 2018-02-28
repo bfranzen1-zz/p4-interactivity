@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 var config = {
     apiKey: "AIzaSyAgY689SEezlkqbhYGGE7EomU4DAE5Gjbo",
@@ -34,6 +34,10 @@ class UserRecipes extends Component {
 
     componentDidMount() {
         this.requestRef = firebase.database().ref('recipes');
+        this.requestRef.on('value', (snapshot) => {
+            let recipes = snapshot.val();
+            this.setState({ recipes: recipes });
+        });
     }
 
     updateForm(event) {
@@ -63,10 +67,8 @@ class UserRecipes extends Component {
             recipe.key = key;
             return recipe;
         }).filter((d) => {
-            console.log(firebase.auth().currentUser.displayName);
             return d.user === firebase.auth().currentUser.uid;
         });
-        console.log(recipeArray);
         return (
             <div>
                 <h1>My Recipes Page</h1>
@@ -75,8 +77,8 @@ class UserRecipes extends Component {
                     {!this.state.isHidden && <RecipeForm addRecipe={() => this.addRecipe()} updateForm={(event) => this.updateForm(event)} />}
                     {recipeArray.map((d, i) => {
                         return <div key={'link-' + i}>
-                                    {d.name}
-                                </div>
+                            {d.name}
+                        </div>
                     })}
                 </div>
             </div>

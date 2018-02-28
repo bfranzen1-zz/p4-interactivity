@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { HashRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './pages/home.jsx';
 import UserRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
@@ -67,33 +66,13 @@ class App extends Component {
     }
 
     render() {
-        return (<div className="container">
+        return (<div>
             {this.state.error &&
                 <p className="alert alert-danger">{this.state.error}</p>
             }
 
             {this.state.user &&
-                <div>
-                    <Router>
-                        <div className="container">
-                            <Link to="/">Home</Link>
-                            {' '}
-                            <Link to="/userRecipes">My Recipes</Link>
-                            {' '}
-                            <Link to="/Recipes">Explore</Link>
-                            {' '}
-                            <Link to="/Account">Account</Link>
-                            {' '}
-                            <button className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
-                                Sign Out
-                            </button>
-                            <Route exact path='/' render={() => <Home user={this.state.user} />} />
-                            <Route path='/userRecipes' render={() => <UserRecipes user={this.state.user} />} />
-                            <Route path='/Recipes' render={() => <Recipes user={this.state.user} />} />
-                            <Route path='/Account' render={() => <Account user={this.state.user} />} />
-                        </div>
-                    </Router>
-                </div>
+                <NavBar user={this.state.user} />
             }
             {!this.state.user &&
                 <div>
@@ -145,5 +124,41 @@ class App extends Component {
 //recipes
 //signin/up/out
 //Home page (informational/how to use site)
+
+class NavBar extends Component {
+
+    signOut() {
+        firebase.auth().signOut();
+    }
+
+    render() {
+        return (
+            <div>
+                <nav id="nav" className="navbar navbar-inverse">
+                    <Router>
+                        <div className="container-fluid">
+                            <span>ReciMe</span>
+                            <Link className="link" to="/">Home</Link>
+                            <Link className="link" to="/userRecipes">My Recipes</Link>
+                            <Link className="link" to="/Recipes">Explore</Link>
+                            <Link className="link" to="/Account">Account</Link>
+                            <button id="signout" className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
+                                Sign Out
+                            </button>
+                        </div>
+                    </Router>
+                </nav>
+                <Router>
+                    <div>
+                        <Route exact path='/' render={() => <Home user={this.props.user} />} />
+                        <Route path='/userRecipes' render={() => <UserRecipes user={this.props.user} />} />
+                        <Route path='/Recipes' render={() => <Recipes user={this.props.user} />} />
+                        <Route path='/Account' render={() => <Account user={this.props.user} />} />
+                    </div>
+                </Router>
+            </div>
+        )
+    }
+}
 
 export default App;
