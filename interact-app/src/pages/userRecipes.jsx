@@ -16,7 +16,6 @@ class UserRecipes extends Component {
     }
 
     toggleHidden() {
-        console.log(this);
         this.setState({
             isHidden: !this.state.isHidden,
             creating: !this.state.creating
@@ -44,19 +43,35 @@ class UserRecipes extends Component {
             name: this.state.name,
             imgLink: this.state.imgLink,
             ingredients: this.state.ingredients,
-            steps: this.state.steps
+            steps: this.state.steps,
+            user: this.props.user.uid
         };
         this.toggleHidden();
         this.requestRef.push(recipe);
     }
 
     render() {
+        let recipeKeys = Object.keys(this.state.recipes);
+        let recipeArray = recipeKeys.map((key) => {
+            let recipe = this.state.recipes[key];
+            recipe.key = key;
+            return recipe;
+        }).filter((d) => {
+            console.log(firebase.auth().currentUser.displayName);
+            return d.user === firebase.auth().currentUser.uid;
+        });
+        console.log(recipeArray);
         return (
             <div>
                 <h1>My Recipes Page</h1>
                 <div>
                     <button onClick={() => this.toggleHidden()} className={this.state.creating ? "btn btn-warning" : "btn btn-primary"}>{this.state.creating ? "Cancel" : "Create New Recipe"}</button>
                     {!this.state.isHidden && <RecipeForm addRecipe={() => this.addRecipe()} updateForm={(event) => this.updateForm(event)} />}
+                    {recipeArray.map((d, i) => {
+                        return <div key={'link-' + i}>
+                                    {d.name}
+                                </div>
+                    })}
                 </div>
             </div>
         )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import Home from './pages/home.jsx';
 import UserRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
