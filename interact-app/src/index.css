@@ -12,6 +12,15 @@ h1 {
     text-align: center;
 }
 
+span {
+    font-size: 30pt;
+    margin-left: -15%;
+}
+
+#signout {
+    margin-right: -5rem !important;
+}
+
 span, .link, .link:hover {
     color: black;
 }
@@ -22,8 +31,17 @@ span, .link, .link:hover {
     margin-bottom: 2rem;
 }
 
+.link {
+    transition: 0.5s;
+    margin-right: -25% !important;
+}
+
+.container {
+    max-width: 80% !important;
+}
+
 .link:hover {
-    transition: 0.7s;
+    transition: 0.7s ease-out;
     text-decoration: none;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     background: rgb(14, 136, 160);

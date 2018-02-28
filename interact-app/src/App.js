@@ -134,9 +134,9 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-                <nav id="nav" className="navbar navbar-inverse">
+                <nav id="nav" className="navbar">
                     <Router>
-                        <div className="container-fluid">
+                        <div className="container">
                             <span>ReciMe</span>
                             <Link className="link" to="/">Home</Link>
                             <Link className="link" to="/userRecipes">My Recipes</Link>
