@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
+var config = {
+    apiKey: "AIzaSyAgY689SEezlkqbhYGGE7EomU4DAE5Gjbo",
+    authDomain: "interactive-app-5ca2d.firebaseapp.com",
+    databaseURL: "https://interactive-app-5ca2d.firebaseio.com",
+    projectId: "interactive-app-5ca2d",
+    storageBucket: "interactive-app-5ca2d.appspot.com",
+    messagingSenderId: "285423782464"
+};
+firebase.initializeApp(config);
+
 class UserRecipes extends Component {
     constructor() {
         super();
@@ -25,10 +35,6 @@ class UserRecipes extends Component {
 
     componentDidMount() {
         this.requestRef = firebase.database().ref('recipes');
-        this.requestRef.on('value', (snapshot) => {
-            let recipes = snapshot.val();
-            this.setState({ recipes: recipes });
-        });
     }
 
     updateForm(event) {
@@ -62,7 +68,6 @@ class UserRecipes extends Component {
         )
     }
 }
-export default UserRecipes
 
 class RecipeForm extends Component {
     render() {
@@ -90,3 +95,4 @@ class RecipeForm extends Component {
     }
 }
 
+export default UserRecipes
