@@ -84,7 +84,6 @@ class UserRecipes extends Component {
         )
     }
 }
-export default UserRecipes
 
 class RecipeForm extends Component {
     render() {
@@ -112,4 +111,4 @@ class RecipeForm extends Component {
     }
 }
 
-
+export default UserRecipes
