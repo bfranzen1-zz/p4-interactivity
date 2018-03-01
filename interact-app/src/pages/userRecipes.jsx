@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
+import { RecipesList } from './RecipesList';
 
 class UserRecipes extends Component {
     constructor() {
@@ -23,6 +24,7 @@ class UserRecipes extends Component {
     }
 
     componentDidMount() {
+        console.log('tets');
         this.requestRef = firebase.database().ref('recipes');
         this.requestRef.on('value', (snapshot) => {
             let recipes = snapshot.val();
@@ -72,15 +74,24 @@ class UserRecipes extends Component {
         this.requestRef.push(recipe);
     }
 
+    deleteRecipe(key) {
+        let recipeRef = firebase.database().ref('recipes/' + key)
+        recipeRef.remove();
+    }
+
     render() {
-        let recipeKeys = Object.keys(this.state.recipes);
-        let recipeArray = recipeKeys.map((key) => {
-            let recipe = this.state.recipes[key];
-            recipe.key = key;
-            return recipe;
-        }).filter((d) => {
-            return d.user === firebase.auth().currentUser.uid;
-        });
+        console.log(this.state.recipes);
+        let recipeArray = [];
+        if (this.state.recipes) {
+            let recipeKeys = Object.keys(this.state.recipes);
+            recipeArray = recipeKeys.map((key) => {
+                let recipe = this.state.recipes[key];
+                recipe.key = key;
+                return recipe;
+            }).filter((d) => {
+                return d.user === firebase.auth().currentUser.uid;
+            });
+        }
         return (
             <div>
                 <h1>Welcome, {this.props.user.displayName}!</h1>
@@ -99,6 +110,7 @@ class UserRecipes extends Component {
                             {d.name}
                         </div>
                     })}
+                    <RecipesList deleteRecipe={(key) => this.props.deleteRecipe(key)} recipeArray={recipeArray} />
                 </div>
             </div>
         )
@@ -110,12 +122,12 @@ class RecipeForm extends Component {
         return (
             <div id="RecipeForm" className="center-block">
                 <div className="form-group">
-                    <label htmlFor="reicpeName">Recipe Name:</label>
+                    <label htmlFor="recipeName">Recipe Name:</label>
                     <input type="text" className="form-control" id="recipeName" name="name" onChange={(event) => { this.props.updateForm(event) }} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="img">Image URL:</label>
-                    <input type="url" className="form-control" id="img" name="image" onChange={(event) => { this.props.updateForm(event) }} />
+                    <label htmlFor="recipeName">Image Url:</label>
+                    <input type="text" className="form-control" id="recipeName" name="imgLink" onChange={(event) => { this.props.updateForm(event) }} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="ingredients">Ingredients List:</label>
