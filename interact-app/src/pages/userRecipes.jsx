@@ -68,6 +68,7 @@ class UserRecipes extends Component {
                 recipe.key = key;
                 return recipe;
             }).filter((d) => {
+                console.log(firebase.auth().currentUser);
                 return d.user === firebase.auth().currentUser.uid;
             });
         }

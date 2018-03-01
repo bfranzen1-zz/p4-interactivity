@@ -12,7 +12,22 @@ h1 {
     text-align: center;
 }
 
-span {
+.info-container {
+    display: flex;
+    margin: auto;
+    width: 60%;
+    min-width: 500px;
+    text-align: center;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.info-item {
+    padding: 10px;
+    width: 80%;
+}
+
+.title {
     font-size: 30pt;
     margin-left: -15%;
 }

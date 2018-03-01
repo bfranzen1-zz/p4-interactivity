@@ -137,12 +137,12 @@ class NavBar extends Component {
                 <nav id="nav" className="navbar">
                     <Router>
                         <div className="container">
-                            <span>ReciMe</span>
+                            <span className="title">ReciMe</span>
                             <Link className="link" to="/">Home</Link>
                             <Link className="link" to="/userRecipes">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>
                             <Link className="link" to="/Account">Account</Link>
-                            <button id="signout" className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
+                            <button id="signout" className="btn btn-warning mr-2" onClick={() => this.signOut()}>
                                 Sign Out
                             </button>
                         </div>
