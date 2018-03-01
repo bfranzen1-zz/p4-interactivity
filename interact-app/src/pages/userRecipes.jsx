@@ -24,7 +24,6 @@ class UserRecipes extends Component {
     }
 
     componentDidMount() {
-        console.log('tets');
         this.requestRef = firebase.database().ref('recipes');
         this.requestRef.on('value', (snapshot) => {
             let recipes = snapshot.val();
@@ -33,7 +32,6 @@ class UserRecipes extends Component {
     }
 
     updateForm(event) {
-        console.log(this.state);
         let val = event.target.value;
         let field = event.target.name;
         let change = {};
@@ -44,7 +42,6 @@ class UserRecipes extends Component {
     updateList(type, event) {
         let val = event.target.value;
         let num = event.target.name.slice(-1);
-        console.log(this.state);
         if (type === "Ingredient") {
             let array = this.state.ingredients;
             array[num - 1] = val;
@@ -80,7 +77,6 @@ class UserRecipes extends Component {
     }
 
     render() {
-        console.log(this.state.recipes);
         let recipeArray = [];
         if (this.state.recipes) {
             let recipeKeys = Object.keys(this.state.recipes);
@@ -110,7 +106,7 @@ class UserRecipes extends Component {
                             {d.name}
                         </div>
                     })}
-                    <RecipesList deleteRecipe={(key) => this.props.deleteRecipe(key)} recipeArray={recipeArray} />
+                    <RecipesList deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
                 </div>
             </div>
         )

@@ -71,32 +71,32 @@ class App extends Component {
             }
 
             {this.state.user &&
-                <NavBar user={this.state.user} />
+                <NavBar onSignOut={this.onSignOut} user={this.state.user} />
             }
             {!this.state.user &&
-                <div>
+                <div id="authentication">
                     <div className="form-group">
-                        <label>Email:</label>
                         <input className="form-control"
                             name="email"
+                            placeholder="E-mail address"
                             value={this.state.email}
                             onChange={(event) => { this.onChange(event) }}
                         />
                     </div>
 
                     <div className="form-group">
-                        <label>Password:</label>
                         <input type="password" className="form-control"
                             name="password"
+                            placeholder="Password"
                             value={this.state.password}
                             onChange={(event) => { this.onChange(event) }}
                         />
                     </div>
 
                     <div className="form-group">
-                        <label>Username:</label>
                         <input className="form-control"
                             name="username"
+                            placeholder={"Username"}
                             value={this.state.username}
                             onChange={(event) => { this.onChange(event) }}
                         />
@@ -140,7 +140,7 @@ class NavBar extends Component {
                             <Link className="link" to="/">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>
                             <Link className="link" to="/Account">Account</Link>
-                            <button id="signout" className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
+                            <button id="signout" className="btn btn-warning mr-2" onClick={() => this.props.onSignOut()}>
                                 Sign Out
                             </button>
                         </div>

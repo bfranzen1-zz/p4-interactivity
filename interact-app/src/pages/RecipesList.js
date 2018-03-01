@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import firebase from 'firebase';
-import {RecipeItem} from './RecipeItem';
+import { RecipeItem } from './RecipeItem';
 
 
 class RecipesList extends Component {
     render() {
-        console.log(this.props.recipeArray);
         return (
             <div className="card-deck">
                 {this.props.recipeArray.map((d, i) => {
@@ -18,4 +17,4 @@ class RecipesList extends Component {
     }
 }
 
-export {RecipesList};
+export { RecipesList };
