@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import Home from './pages/home.jsx';
 import UserRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
 import Account from './pages/account.jsx';
 import firebase from 'firebase';
+import logo from './icon3.png';
 
 class App extends Component {
     constructor(props) {
@@ -72,44 +72,50 @@ class App extends Component {
             }
 
             {this.state.user &&
-                <NavBar user={this.state.user} />
+                <NavBar onSignOut={this.onSignOut} user={this.state.user} />
             }
             {!this.state.user &&
-                <div>
-                    <div className="form-group">
-                        <label>Email:</label>
-                        <input className="form-control"
-                            name="email"
-                            value={this.state.email}
-                            onChange={(event) => { this.onChange(event) }}
-                        />
-                    </div>
+                <div id="background">
+                    <div id="container">
+                        <i className="fa fa-cutlery"></i>
+                        <h1 className="auth">Log in to ReciMe!</h1>
+                        <div id="authentication">
+                            <div className="form-group">
+                                <input className="form-control"
+                                    name="email"
+                                    placeholder="E-mail address"
+                                    value={this.state.email}
+                                    onChange={(event) => { this.onChange(event) }}
+                                />
+                            </div>
 
-                    <div className="form-group">
-                        <label>Password:</label>
-                        <input type="password" className="form-control"
-                            name="password"
-                            value={this.state.password}
-                            onChange={(event) => { this.onChange(event) }}
-                        />
-                    </div>
+                            <div className="form-group">
+                                <input type="password" className="form-control"
+                                    name="password"
+                                    placeholder="Password"
+                                    value={this.state.password}
+                                    onChange={(event) => { this.onChange(event) }}
+                                />
+                            </div>
 
-                    <div className="form-group">
-                        <label>Username:</label>
-                        <input className="form-control"
-                            name="username"
-                            value={this.state.username}
-                            onChange={(event) => { this.onChange(event) }}
-                        />
-                    </div>
+                            <div className="form-group">
+                                <input className="form-control"
+                                    name="username"
+                                    placeholder={"Username"}
+                                    value={this.state.username}
+                                    onChange={(event) => { this.onChange(event) }}
+                                />
+                            </div>
 
-                    <div className="form-group">
-                        <button className="btn btn-primary mr-2" onClick={() => this.onSignUp()}>
-                            Sign Up
-             </button>
-                        <button className="btn btn-success mr-2" onClick={() => this.onSignIn()}>
-                            Sign In
-            </button>
+                            <div className="form-group">
+                                <button className="btn btn-primary mr-2" onClick={() => this.onSignUp()}>
+                                    Sign Up
+                            </button>
+                                <button className="btn btn-success mr-2" onClick={() => this.onSignIn()}>
+                                    Sign In
+                            </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
@@ -137,12 +143,20 @@ class NavBar extends Component {
                 <nav id="nav" className="navbar">
                     <Router>
                         <div className="container">
+<<<<<<< HEAD
                             <span className="title">ReciMe</span>
                             <Link className="link" to="/">Home</Link>
                             <Link className="link" to="/userRecipes">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>
                             <Link className="link" to="/Account">Account</Link>
                             <button id="signout" className="btn btn-warning mr-2" onClick={() => this.signOut()}>
+=======
+                            <span id="SiteName">ReciMe</span>
+                            <Link className="link" to="/">My Recipes</Link>
+                            <Link className="link" to="/Recipes">Explore</Link>
+                            <Link className="link" to="/Account">Account</Link>
+                            <button id="signout" className="btn btn-warning mr-2" onClick={() => this.props.onSignOut()}>
+>>>>>>> 839b42b394d774eb36f2bda9f112cfbae118b59d
                                 Sign Out
                             </button>
                         </div>
@@ -150,8 +164,7 @@ class NavBar extends Component {
                 </nav>
                 <Router>
                     <div>
-                        <Route exact path='/' render={() => <Home user={this.props.user} />} />
-                        <Route path='/userRecipes' render={() => <UserRecipes user={this.props.user} />} />
+                        <Route exact path='/' render={() => <UserRecipes user={this.props.user} />} />
                         <Route path='/Recipes' render={() => <Recipes user={this.props.user} />} />
                         <Route path='/Account' render={() => <Account user={this.props.user} />} />
                     </div>

@@ -12,6 +12,7 @@ h1 {
     text-align: center;
 }
 
+<<<<<<< HEAD
 .info-container {
     display: flex;
     margin: auto;
@@ -28,6 +29,9 @@ h1 {
 }
 
 .title {
+=======
+#SiteName {
+>>>>>>> 839b42b394d774eb36f2bda9f112cfbae118b59d
     font-size: 30pt;
     margin-left: -15%;
 }
@@ -62,4 +66,69 @@ span, .link, .link:hover {
     background: rgb(14, 136, 160);
     border-radius: 5px;
     padding: 7px 7px;
+}
+
+.info {
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.ListItem {
+    margin-left: 2rem;
+}
+
+.form-control {
+    width: 50% !important;
+}
+
+#AddButton {
+    margin: auto auto 1rem 2rem;
+}
+
+#authentication {
+    text-align: center;
+    border: 1px solid rgb(146, 145, 145);
+    max-width: 450px;
+    width: 55%;
+    margin: 2rem auto 30vh auto;
+    box-shadow: 2px 2px 8px rgba(49, 49, 49, 0.5);
+    border-radius: 3px;
+    background-color: aliceblue;
+}
+
+#authentication .form-control {
+    margin-top: 1.5rem !important;
+}
+
+input {
+    margin: auto !important;
+}
+
+i {
+    color: rgb(72, 168, 237);
+    font-size: 85px !important;
+    position: relative;
+}
+
+h1.auth {
+    position: relative;
+    display: inline;
+    margin-left: 1rem;
+}
+
+i, h1.auth {
+    margin-top: 20vh;
+}
+
+.form-group button {
+    margin: auto 1rem !important;
+}
+
+#background {
+    background-color: azure;
+    height: 100vh;
+}
+
+#container {
+    text-align: center;
 }
