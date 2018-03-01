@@ -5,6 +5,7 @@ import UserRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
 import Account from './pages/account.jsx';
 import firebase from 'firebase';
+import logo from './icon3.png';
 
 class App extends Component {
     constructor(props) {
@@ -74,41 +75,47 @@ class App extends Component {
                 <NavBar onSignOut={this.onSignOut} user={this.state.user} />
             }
             {!this.state.user &&
-                <div id="authentication">
-                    <div className="form-group">
-                        <input className="form-control"
-                            name="email"
-                            placeholder="E-mail address"
-                            value={this.state.email}
-                            onChange={(event) => { this.onChange(event) }}
-                        />
-                    </div>
+                <div id="background">
+                    <div id="container">
+                        <i className="fa fa-cutlery"></i>
+                        <h1 className="auth">Log in to ReciMe!</h1>
+                        <div id="authentication">
+                            <div className="form-group">
+                                <input className="form-control"
+                                    name="email"
+                                    placeholder="E-mail address"
+                                    value={this.state.email}
+                                    onChange={(event) => { this.onChange(event) }}
+                                />
+                            </div>
 
-                    <div className="form-group">
-                        <input type="password" className="form-control"
-                            name="password"
-                            placeholder="Password"
-                            value={this.state.password}
-                            onChange={(event) => { this.onChange(event) }}
-                        />
-                    </div>
+                            <div className="form-group">
+                                <input type="password" className="form-control"
+                                    name="password"
+                                    placeholder="Password"
+                                    value={this.state.password}
+                                    onChange={(event) => { this.onChange(event) }}
+                                />
+                            </div>
 
-                    <div className="form-group">
-                        <input className="form-control"
-                            name="username"
-                            placeholder={"Username"}
-                            value={this.state.username}
-                            onChange={(event) => { this.onChange(event) }}
-                        />
-                    </div>
+                            <div className="form-group">
+                                <input className="form-control"
+                                    name="username"
+                                    placeholder={"Username"}
+                                    value={this.state.username}
+                                    onChange={(event) => { this.onChange(event) }}
+                                />
+                            </div>
 
-                    <div className="form-group">
-                        <button className="btn btn-primary mr-2" onClick={() => this.onSignUp()}>
-                            Sign Up
-             </button>
-                        <button className="btn btn-success mr-2" onClick={() => this.onSignIn()}>
-                            Sign In
-            </button>
+                            <div className="form-group">
+                                <button className="btn btn-primary mr-2" onClick={() => this.onSignUp()}>
+                                    Sign Up
+                            </button>
+                                <button className="btn btn-success mr-2" onClick={() => this.onSignIn()}>
+                                    Sign In
+                            </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             }

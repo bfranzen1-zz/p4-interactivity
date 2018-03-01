@@ -69,10 +69,12 @@ span, .link, .link:hover {
 #authentication {
     text-align: center;
     border: 1px solid rgb(146, 145, 145);
-    width: 50%;
-    margin: 30vh auto;
+    max-width: 450px;
+    width: 55%;
+    margin: 2rem auto 30vh auto;
     box-shadow: 2px 2px 8px rgba(49, 49, 49, 0.5);
     border-radius: 3px;
+    background-color: aliceblue;
 }
 
 #authentication .form-control {
@@ -81,4 +83,33 @@ span, .link, .link:hover {
 
 input {
     margin: auto !important;
+}
+
+i {
+    color: rgb(72, 168, 237);
+    font-size: 85px !important;
+    position: relative;
+}
+
+h1.auth {
+    position: relative;
+    display: inline;
+    margin-left: 1rem;
+}
+
+i, h1.auth {
+    margin-top: 20vh;
+}
+
+.form-group button {
+    margin: auto 1rem !important;
+}
+
+#background {
+    background-color: azure;
+    height: 100vh;
+}
+
+#container {
+    text-align: center;
 }
