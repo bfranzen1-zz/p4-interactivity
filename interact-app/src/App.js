@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import Home from './pages/home.jsx';
 import UserRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
 import Account from './pages/account.jsx';
@@ -137,9 +136,8 @@ class NavBar extends Component {
                 <nav id="nav" className="navbar">
                     <Router>
                         <div className="container">
-                            <span>ReciMe</span>
-                            <Link className="link" to="/">Home</Link>
-                            <Link className="link" to="/userRecipes">My Recipes</Link>
+                            <span id="SiteName">ReciMe</span>
+                            <Link className="link" to="/">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>
                             <Link className="link" to="/Account">Account</Link>
                             <button id="signout" className="btn btn-warning mr-2" onClick={() => this.onSignOut()}>
@@ -150,8 +148,7 @@ class NavBar extends Component {
                 </nav>
                 <Router>
                     <div>
-                        <Route exact path='/' render={() => <Home user={this.props.user} />} />
-                        <Route path='/userRecipes' render={() => <UserRecipes user={this.props.user} />} />
+                        <Route exact path='/' render={() => <UserRecipes user={this.props.user} />} />
                         <Route path='/Recipes' render={() => <Recipes user={this.props.user} />} />
                         <Route path='/Account' render={() => <Account user={this.props.user} />} />
                     </div>
