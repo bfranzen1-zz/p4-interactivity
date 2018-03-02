@@ -95,8 +95,8 @@ class UserRecipes extends Component {
                 <p className="info">Look at the recipes you've made, click on them to see likes, comments and
                     other data! Create new Recipes here too.
                 </p>
-                <div>
-                    <button onClick={() => this.toggleHidden()} className={this.state.creating ? "btn btn-warning" : "btn btn-primary"}>
+                <div id="recipeForm">
+                    <button id="makeRecipe" onClick={() => this.toggleHidden()} className={this.state.creating ? "btn btn-warning" : "btn btn-primary"}>
                         {this.state.creating ? "Cancel" : "Create New Recipe"}
                     </button>
                     {!this.state.isHidden && <RecipeForm updateList={(event, type) => this.updateList(type, event)}
@@ -107,8 +107,9 @@ class UserRecipes extends Component {
                             {d.name}
                         </div>
                     })}
-                    <RecipesList deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
+
                 </div>
+                <RecipesList deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
             </div>
         )
     }
@@ -119,12 +120,10 @@ class RecipeForm extends Component {
         return (
             <div id="RecipeForm" className="center-block">
                 <div className="form-group">
-                    <label htmlFor="recipeName">Recipe Name:</label>
-                    <input type="text" className="form-control" id="recipeName" name="name" onChange={(event) => { this.props.updateForm(event) }} />
+                    <input placeholder="Recipe Name" type="text" className="form-control" id="recipeName" name="name" onChange={(event) => { this.props.updateForm(event) }} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="recipeName">Image Url:</label>
-                    <input type="text" className="form-control" id="recipeName" name="imgLink" onChange={(event) => { this.props.updateForm(event) }} />
+                    <input placeholder="Image of Food" type="text" className="form-control" id="img" name="imgLink" onChange={(event) => { this.props.updateForm(event) }} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="ingredients">Ingredients List:</label>
@@ -165,17 +164,16 @@ class List extends Component {
         let inputs = [];
         for (let i = 1; i <= this.state.count; i++) {
             inputs.push(<div className="ListItem" key={i}>
-                <span key={i}>{i + "."}</span>
-                <input onChange={(event) => this.props.update(this.props.type, event)} key={"item" + i} type="text" className="form-control" name={this.props.type + i} />
+                <input placeholder={i + "."} onChange={(event) => this.props.update(this.props.type, event)} key={"item" + i} type="text" className="form-control" name={this.props.type + i} />
             </div>);
         }
         return (
-            <div>
+            <div className="List">
                 {inputs}
-                <button id="AddButton" type="button" className="btn btn-primary btn-sm" onClick={() => this.add()}>
+                <button id="addBtn" type="button" className="btn btn-primary btn-sm " onClick={() => this.add()}>
                     +
                 </button>
-                <button id="AddButton" type="button" className="btn btn-danger btn-sm" onClick={() => this.delete()}>
+                <button id="delBtn" type="button" className="btn btn-danger btn-sm" onClick={() => this.delete()}>
                     -
                 </button>
             </div>);
