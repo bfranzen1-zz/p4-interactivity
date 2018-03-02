@@ -13,7 +13,8 @@ class Account extends Component {
             displayName: '',
             email: '',
             reEmail: '',
-            rePassword: ''
+            rePassword: '',
+            authenticating: false
         };
     }
 
@@ -35,6 +36,12 @@ class Account extends Component {
         })
     }
 
+    toggleAuthenticating() {
+        this.setState({
+            authenticating: !this.state.authenticating
+        });
+    }
+
     updateValue(event) {    
         let val = event.target.value;
         let field = event.target.name;
@@ -43,7 +50,21 @@ class Account extends Component {
         this.setState(change);
     }
 
-    updateUser(event) {
+    reAuth(email, password) {
+        let currentUser = firebase.auth().currentUser;
+        let credential = firebase.auth.EmailAuthProvider.credential(
+            email,
+            password
+        );
+        currentUser.reauthenticateWithCredential(credential).then(() => {
+            this.toggleAuthenticating();
+            this.setState({emailHidden: true});
+        }).catch((error) => {
+            this.setState({ error: error.message })
+        });
+    }
+
+    updateUser(event, credential) {
         this.setState({
             success: false
         });
@@ -59,33 +80,27 @@ class Account extends Component {
             this.toggleEmail();
             
         }
-        console.log(val);
         let change = {};
         change[field] = val;
         if (field === 'email') {
-            // let credential = firebase.auth.EmailAuthProvider.credential(
-            //     currentUser.email
-                
-            // );
-            // currentUser.reauthenticateWithCredential(credential).then(() => {
-                
-            //   }).catch(function(error) {
-            //     // An error happened.
-            //   });
             currentUser.updateEmail(
                 val
             ).then(() => {
                 this.toggleSuccess();
-            }).catch(function (error) {
-                // An error happened.
+            }).catch((error) => {
+                console.log(error);
+                this.setState({ error: error.message })
+                if (error.code == 'auth/requires-recent-login') {
+                    this.toggleAuthenticating()
+                }
             });
         } else {
             currentUser.updateProfile(
                 change
             ).then(() => {
                 this.toggleSuccess();
-            }).catch(function (error) {
-                // An error happened.
+            }).catch((error) => {
+                this.setState({ error: error.message });
             });
         }
 
@@ -101,36 +116,60 @@ class Account extends Component {
                 {this.state.success &&
                 <p className="alert alert-success">{'Successfully Updated Account Information'}</p>
                 }
-                <div className="info-container">
+                {this.state.error &&
+                <p className="alert alert-danger">{this.state.error}</p>
+                }
+                {!this.state.authenticating && <div className="info-container">
                     <span className="info-item">
-                        <div>
+                        <div className="info-sub-item">
                             Username: {currentUser.displayName}
                         </div>
-                        <div>
-                            <button type="button" className={this.state.userNameHidden ? "btn btn-warning btn-sm" : "btn btn-outline-primary btn-sm"} onClick={() => this.toggleName()}>{this.state.userNameHidden ? "Cancel" : "Change Username"}</button>
+                        <div className="info-sub-button">
+                            <button type="button" className={this.state.userNameHidden ? "btn btn-warning btn-sm" : "btn btn-link btn-sm"} onClick={() => this.toggleName()}>{this.state.userNameHidden ? "Cancel" : "Change Username"}</button>
                         </div>
 
-                        {this.state.userNameHidden && <UpdateForm updateUser={(event) => this.updateUser(event)} updateValue={(event) => this.updateValue(event)} changeType='displayName'/>}
+                        {this.state.userNameHidden && <UpdateForm className="info-sub-item" updateUser={(event) => this.updateUser(event)} updateValue={(event) => this.updateValue(event)} changeType='displayName'/>}
 
                     </span>
                     <span className="info-item">
-                        <div>
+                        <div className="info-sub-item">
                             Email: {currentUser.email}
                         </div>
-                        <div>
-                            <button type="button" className={this.state.emailHidden ? "btn btn-warning btn-sm" : "btn btn-outline-primary btn-sm"} onClick={() => this.toggleEmail()}>{this.state.emailHidden ? "Cancel" : "Change Email"}</button>
+                        <div className="info-sub-button">
+                            <button type="button" className={this.state.emailHidden ? "btn btn-warning btn-sm" : "btn btn-link btn-sm"} onClick={() => this.toggleEmail()}>{this.state.emailHidden ? "Cancel" : "Change Email"}</button>
                         </div>
-                        {this.state.emailHidden && <UpdateForm updateUser={(event) => this.updateUser(event)} updateValue={(event) => this.updateValue(event)} changeType='email' />}
+                        {this.state.emailHidden && <UpdateForm className="info-sub-item" updateUser={(event) => this.updateUser(event)} updateValue={(event) => this.updateValue(event)} changeType='email' />}
                     </span>
-                </div>
-                <div className="form-group">
-                    <label>Password:</label>
-                    <input type="password" className="form-control"
-                        name="password"
-                        value={this.state.password}
-                        onChange={(event) => { this.onChange(event) }}
-                    />
-                </div>
+                </div>}
+                {this.state.authenticating && <div>
+                    <div id="container">
+                        <h4 className="auth">Please Enter Original Email and Password</h4>
+                        <div id="authentication">
+                            <div className="form-group top-form">
+                                <input 
+                                    name="reEmail"
+                                    placeholder="E-mail address"
+                                    value={this.state.reEmail}
+                                    onChange={(event) => { this.updateValue(event) }}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <input type="password"
+                                    name="rePassword"
+                                    placeholder="Password"
+                                    value={this.state.rePassword}
+                                    onChange={(event) => { this.updateValue(event) }}
+                                />
+                            </div>
+                            <div className="set-button">
+                                <button id="try-again" className="btn btn-success mr-2" onClick={() => this.reAuth(this.state.reEmail, this.state.rePassword)}>
+                                    Try Again
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
             </div>
         )
     }
@@ -149,7 +188,9 @@ class UpdateForm extends Component {
             <div className="form-group">
                 <label htmlFor="Username">{"New " + changeType + ": "}</label>
                 <input type="text" className="form-control" id={this.props.changeType} name={this.props.changeType} onChange={(event) => { this.props.updateValue(event) }} />
-                <button name={this.props.changeType} onClick={(event) => this.props.updateUser(event)} >Set {changeType}</button>
+                <div className="set-button">
+                    <button className="btn btn-success btn-sm" name={this.props.changeType} onClick={(event) => this.props.updateUser(event)} >Set {changeType}</button>
+                </div>
             </div>
         )
     }

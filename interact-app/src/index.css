@@ -12,11 +12,10 @@ h1 {
     text-align: center;
 }
 
-<<<<<<< HEAD
 .info-container {
     display: flex;
     margin: auto;
-    width: 60%;
+    width: 80%;
     min-width: 500px;
     text-align: center;
     border: 3px solid green;
@@ -28,10 +27,34 @@ h1 {
     width: 80%;
 }
 
-.title {
-=======
+.top-form {
+    padding-top: 10px;
+    margin-bottom: 0px;
+}
+
+.card-deck {
+    width: 80%;
+    display: flex;
+}
+
+#try-again {
+    padding-bottom: 5px !important;
+}
+
+.info-sub-item {
+    padding: 5px;
+}
+
+.set-button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.alert {
+    text-align: center;
+}
+
 #SiteName {
->>>>>>> 839b42b394d774eb36f2bda9f112cfbae118b59d
     font-size: 30pt;
     margin-left: -15%;
 }
@@ -79,6 +102,10 @@ span, .link, .link:hover {
 
 .form-control {
     width: 50% !important;
+}
+
+#displayName.form-control, #email.form-control {
+    width: 80% !important;
 }
 
 #AddButton {
