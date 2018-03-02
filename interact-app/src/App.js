@@ -67,10 +67,6 @@ class App extends Component {
 
     render() {
         return (<div>
-            {this.state.error &&
-                <p className="alert alert-danger">{this.state.error}</p>
-            }
-
             {this.state.user &&
                 <NavBar onSignOut={this.onSignOut} user={this.state.user} />
             }
@@ -80,6 +76,8 @@ class App extends Component {
                         <i className="fa fa-cutlery"></i>
                         <h1 className="auth">Log in to ReciMe!</h1>
                         <div id="authentication">
+                            {this.state.error &&
+                                <p className="alert alert-danger">{this.state.error}</p>}
                             <div className="form-group">
                                 <input className="form-control"
                                     name="email"

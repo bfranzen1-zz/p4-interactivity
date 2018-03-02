@@ -32,18 +32,14 @@ h1 {
     margin-bottom: 0px;
 }
 
-/* keep images in check */
-.card-deck .card {
-    flex-basis: 200px !important;
-    margin-bottom: 30px !important;
+.card-columns {
+    margin-top: 1rem !important;
+    column-gap: 1% !important;
+    column-count: 1 !important;
 }
-  
+
 .card {
-    box-shadow: 5px 5px 5px gray !important;
-}
-  
-.card-img {
-    max-height: 10em !important;
+    margin: 2rem 12% auto auto;
 }
 
 #try-again {
@@ -63,10 +59,8 @@ h1 {
     text-align: center;
 }
 
-
 #SiteName {
-    position: relative;
-    font-size: 30pt;
+    display: none;
 }
 
 #navLinks.container {
@@ -88,10 +82,6 @@ span, .link, .link:hover {
     transition: 0.5s;
 }
 
-.container {
-    margin: auto 0 !important;
-}
-
 .link:hover {
     transition: 0.7s ease-out;
     text-decoration: none;
@@ -99,6 +89,10 @@ span, .link, .link:hover {
     background: rgb(14, 136, 160);
     border-radius: 5px;
     padding: 7px 7px;
+}
+
+.container {
+    margin: auto 0 !important;
 }
 
 .info {
@@ -114,8 +108,8 @@ span, .link, .link:hover {
     width: 80% !important;
 }
 
-#AddButton {
-    margin: auto auto 1rem 2rem;
+#addBtn {
+    margin: auto !important;
 }
 
 #delBtn, addBtn {
@@ -175,5 +169,27 @@ i, h1.auth {
 }
 
 #recipeForm {
-    max-width: 50%;
+    margin-top: 8rem;
+}
+
+@media(min-width: 700px) {
+    #SiteName {
+        display: inline;
+        position: relative;
+        font-size: 30pt;
+    }
+    .card-columns {
+        margin: 1rem auto auto 10% !important;
+        column-gap: 1% !important;
+        column-count: 2 !important;
+    }
+    .card {
+        margin: 2rem 10% auto auto;
+    }
+}
+
+@media(min-width: 1100px) {
+    .card-columns {
+        column-count: 3 !important;
+    }
 }

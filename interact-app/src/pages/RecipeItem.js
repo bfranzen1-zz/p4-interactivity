@@ -25,7 +25,7 @@ class RecipeItem extends Component {
         return (
             <div className="card" style={{ width: 18 + "rem" }}>
                 <div className="card-header">
-                    <h5 className="card-title">{this.props.recipe.creator + "'s " +  this.props.recipe.name}</h5>
+                    
                     <ul className="nav nav-tabs card-header-tabs pull-right" id="myTab" role="tablist">
                         <li className="nav-item">
                             <a className={this.state.home ? "nav-link active" : "nav-link"} id="home-tab" name="home" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true" onClick={(event) => {
@@ -44,6 +44,7 @@ class RecipeItem extends Component {
                 </div>
                 <div className="card-body">
                     <div className="tab-content" id="myTabContent">
+        
                         <HomeTab recipe={this.props.recipe} />
 
                     </div>
@@ -59,6 +60,7 @@ class HomeTab extends Component {
             <div>
                 
                 <img className="card-img-top" src={this.props.recipe.imgLink} alt="Card image" />
+                <h5 className="card-title">{this.props.recipe.creator + "'s " +  this.props.recipe.name}</h5>
                 
             </div>
 

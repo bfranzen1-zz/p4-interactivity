@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import firebase from 'firebase';
 
 
@@ -20,7 +20,7 @@ class Account extends Component {
 
     toggleName() {
         this.setState({
-            userNameHidden: !this.state.userNameHidden            
+            userNameHidden: !this.state.userNameHidden
         });
     }
 
@@ -42,7 +42,7 @@ class Account extends Component {
         });
     }
 
-    updateValue(event) {    
+    updateValue(event) {
         let val = event.target.value;
         let field = event.target.name;
         let change = {};
@@ -58,7 +58,7 @@ class Account extends Component {
         );
         currentUser.reauthenticateWithCredential(credential).then(() => {
             this.toggleAuthenticating();
-            this.setState({emailHidden: true});
+            this.setState({ emailHidden: true });
         }).catch((error) => {
             this.setState({ error: error.message })
         });
@@ -70,15 +70,15 @@ class Account extends Component {
         });
         let currentUser = firebase.auth().currentUser;
         let field = event.target.name;
-        let val = ''; 
-        if(field === "displayName") {
+        let val = '';
+        if (field === "displayName") {
             val = this.state.displayName;
             this.toggleName();
-            
+
         } else if (field === 'email') {
             val = this.state.email;
             this.toggleEmail();
-            
+
         }
         let change = {};
         change[field] = val;
@@ -109,15 +109,15 @@ class Account extends Component {
 
     render() {
         let currentUser = firebase.auth().currentUser;
-        let type='';
+        let type = '';
         return (
             <div>
-                <h1>Account Page</h1>
+                <h1>Your Account</h1>
                 {this.state.success &&
-                <p className="alert alert-success">{'Successfully Updated Account Information'}</p>
+                    <p className="alert alert-success">{'Successfully Updated Account Information'}</p>
                 }
                 {this.state.error &&
-                <p className="alert alert-danger">{this.state.error}</p>
+                    <p className="alert alert-danger">{this.state.error}</p>
                 }
                 {!this.state.authenticating && <div id="authentication">
                     <span className="info-item">
@@ -128,7 +128,7 @@ class Account extends Component {
                             <button type="button" className={this.state.userNameHidden ? "btn btn-warning btn-sm" : "btn btn-link btn-sm"} onClick={() => this.toggleName()}>{this.state.userNameHidden ? "Cancel" : "Change Username"}</button>
                         </div>
 
-                        {this.state.userNameHidden && <UpdateForm className="info-sub-item" updateUser={(event) => this.updateUser(event)} updateValue={(event) => this.updateValue(event)} changeType='displayName'/>}
+                        {this.state.userNameHidden && <UpdateForm className="info-sub-item" updateUser={(event) => this.updateUser(event)} updateValue={(event) => this.updateValue(event)} changeType='displayName' />}
 
                     </span>
                     <span className="info-item">
@@ -146,7 +146,7 @@ class Account extends Component {
                         <h4 className="auth">Please Enter Original Email and Password</h4>
                         <div id="authentication">
                             <div className="form-group top-form">
-                                <input 
+                                <input
                                     name="reEmail"
                                     placeholder="E-mail address"
                                     value={this.state.reEmail}
@@ -178,8 +178,8 @@ export default Account
 
 class UpdateForm extends Component {
     render() {
-        let changeType =''
-        if(this.props.changeType === 'displayName') {
+        let changeType = ''
+        if (this.props.changeType === 'displayName') {
             changeType = 'Username';
         } else if (this.props.changeType === 'email') {
             changeType = 'Email';

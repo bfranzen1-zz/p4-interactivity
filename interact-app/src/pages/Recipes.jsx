@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import {RecipesList} from './RecipesList';
+import { RecipesList } from './RecipesList';
 
 class Recipes extends Component {
     constructor() {
@@ -9,7 +9,7 @@ class Recipes extends Component {
             recipes: []
         };
     }
-    
+
     deleteRecipe(key) {
         let recipeRef = firebase.database().ref('recipes/' + key)
         recipeRef.remove();
@@ -22,7 +22,7 @@ class Recipes extends Component {
             this.setState({ recipes: recipes });
         });
     }
-    
+
     render() {
         let recipeArray = [];
         if (this.state.recipes) {
