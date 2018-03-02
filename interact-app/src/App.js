@@ -142,11 +142,7 @@ class NavBar extends Component {
             <div>
                 <nav id="nav" className="navbar">
                     <Router>
-<<<<<<< HEAD
-                        <div className="container">
-=======
                         <div id="navLinks" className="container">
->>>>>>> 15a3972ba76fae89f4a6259d990ac0c7ab2261ff
                             <span id="SiteName">ReciMe</span>
                             <Link className="link" to="/">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>

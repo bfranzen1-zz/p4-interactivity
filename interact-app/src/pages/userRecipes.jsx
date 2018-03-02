@@ -11,6 +11,7 @@ class UserRecipes extends Component {
             recipes: [],
             name: '',
             imgLink: '',
+            creator: '',
             ingredients: [],
             steps: []
         };
@@ -63,6 +64,7 @@ class UserRecipes extends Component {
         let recipe = {
             name: this.state.name,
             imgLink: this.state.imgLink,
+            creator: this.props.user.displayName,
             ingredients: this.state.ingredients,
             steps: this.state.steps,
             user: this.props.user.uid

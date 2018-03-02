@@ -119,7 +119,7 @@ class Account extends Component {
                 {this.state.error &&
                 <p className="alert alert-danger">{this.state.error}</p>
                 }
-                {!this.state.authenticating && <div className="info-container">
+                {!this.state.authenticating && <div id="authentication">
                     <span className="info-item">
                         <div className="info-sub-item">
                             Username: {currentUser.displayName}

@@ -27,15 +27,23 @@ h1 {
     width: 80%;
 }
 
-<<<<<<< HEAD
 .top-form {
     padding-top: 10px;
     margin-bottom: 0px;
 }
 
-.card-deck {
-    width: 80%;
-    display: flex;
+/* keep images in check */
+.card-deck .card {
+    flex-basis: 200px !important;
+    margin-bottom: 30px !important;
+}
+  
+.card {
+    box-shadow: 5px 5px 5px gray !important;
+}
+  
+.card-img {
+    max-height: 10em !important;
 }
 
 #try-again {
@@ -55,11 +63,9 @@ h1 {
     text-align: center;
 }
 
-#SiteName {
-=======
+
 #SiteName {
     position: relative;
->>>>>>> 15a3972ba76fae89f4a6259d990ac0c7ab2261ff
     font-size: 30pt;
 }
 
@@ -104,21 +110,16 @@ span, .link, .link:hover {
     width: 50% !important;
 }
 
-<<<<<<< HEAD
 #displayName.form-control, #email.form-control {
     width: 80% !important;
 }
 
 #AddButton {
     margin: auto auto 1rem 2rem;
-=======
-#addBtn {
-    margin: auto !important;
 }
 
 #delBtn, addBtn {
     padding: 4px 10px;
->>>>>>> 15a3972ba76fae89f4a6259d990ac0c7ab2261ff
 }
 
 #authentication, #recipeForm {
