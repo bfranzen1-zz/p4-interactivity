@@ -67,10 +67,6 @@ class App extends Component {
 
     render() {
         return (<div>
-            {this.state.error &&
-                <p className="alert alert-danger">{this.state.error}</p>
-            }
-
             {this.state.user &&
                 <NavBar onSignOut={this.onSignOut} user={this.state.user} />
             }
@@ -80,6 +76,8 @@ class App extends Component {
                         <i className="fa fa-cutlery"></i>
                         <h1 className="auth">Log in to ReciMe!</h1>
                         <div id="authentication">
+                            {this.state.error &&
+                                <p className="alert alert-danger">{this.state.error}</p>}
                             <div className="form-group">
                                 <input className="form-control"
                                     name="email"
@@ -142,11 +140,7 @@ class NavBar extends Component {
             <div>
                 <nav id="nav" className="navbar">
                     <Router>
-<<<<<<< HEAD
-                        <div className="container">
-=======
                         <div id="navLinks" className="container">
->>>>>>> 15a3972ba76fae89f4a6259d990ac0c7ab2261ff
                             <span id="SiteName">ReciMe</span>
                             <Link className="link" to="/">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>

@@ -4,16 +4,16 @@ class RecipeItem extends Component {
     render() {
         return (
             <div className="card" style={{ width: 18 + 'rem' }}>
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#test">Active</a>
+                <div className="card-header">
+                    <ul className="nav nav-tabs card-header-tabs">
+                        <li className="nav-item">
+                            <a className="nav-link" href="#test">Active</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Link</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
+                        <li className="nav-item">
+                            <a className="nav-link disabled" href="#">Disabled</a>
                         </li>
                     </ul>
                 </div>
