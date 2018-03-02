@@ -32,7 +32,7 @@ h1 {
     margin-bottom: 0px;
 }
 
-.card-columns {
+.card-deck {
     margin-top: 1rem !important;
     column-gap: 1% !important;
     column-count: 1 !important;
@@ -178,7 +178,7 @@ i, h1.auth {
         position: relative;
         font-size: 30pt;
     }
-    .card-columns {
+    .card-deck {
         margin: 1rem auto auto 10% !important;
         column-gap: 1% !important;
         column-count: 2 !important;
@@ -189,7 +189,7 @@ i, h1.auth {
 }
 
 @media(min-width: 1100px) {
-    .card-columns {
+    .card-deck {
         column-count: 3 !important;
     }
 }

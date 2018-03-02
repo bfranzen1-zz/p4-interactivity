@@ -87,6 +87,7 @@ class UserRecipes extends Component {
                 recipe.key = key;
                 return recipe;
             }).filter((d) => {
+                console.log(firebase.auth().currentUser);
                 return d.user === firebase.auth().currentUser.uid;
             });
         }
@@ -103,6 +104,12 @@ class UserRecipes extends Component {
                     {!this.state.isHidden && <RecipeForm updateList={(event, type) => this.updateList(type, event)}
                         addRecipe={() => this.addRecipe()} updateForm={(event) => this.updateForm(event)}
                         remove={(type) => this.removeItem(type)} />}
+                    {recipeArray.map((d, i) => {
+                        return <div key={'link-' + i}>
+                            {d.name}
+                        </div>
+                    })}
+
                 </div>
                 <RecipesList deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
             </div>

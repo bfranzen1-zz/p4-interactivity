@@ -6,10 +6,11 @@ import { RecipeItem } from './RecipeItem';
 class RecipesList extends Component {
     render() {
         return (
-            <div className="card-columns">
+            <div className="card-deck">
                 {this.props.recipeArray.map((d, i) => {
-                    return (
-                        <RecipeItem key={i} deleteRecipe={(key) => this.props.deleteRecipe(key)} recipe={d} />)
+                    return <div key={'link-' + i}>
+                        <RecipeItem deleteRecipe={(key) => this.props.deleteRecipe(key)} recipe={d} />
+                    </div>
                 })}
             </div>
         )

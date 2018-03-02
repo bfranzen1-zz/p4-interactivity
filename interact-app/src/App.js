@@ -6,7 +6,7 @@ import Recipes from './pages/Recipes.jsx';
 import Account from './pages/account.jsx';
 import firebase from 'firebase';
 import logo from './icon3.png';
-
+import 'font-awesome/css/font-awesome.min.css';
 class App extends Component {
     constructor(props) {
         super(props);
@@ -67,6 +67,10 @@ class App extends Component {
 
     render() {
         return (<div>
+            {this.state.error &&
+                <p className="alert alert-danger">{this.state.error}</p>
+            }
+
             {this.state.user &&
                 <NavBar onSignOut={this.onSignOut} user={this.state.user} />
             }
@@ -76,8 +80,6 @@ class App extends Component {
                         <i className="fa fa-cutlery"></i>
                         <h1 className="auth">Log in to ReciMe!</h1>
                         <div id="authentication">
-                            {this.state.error &&
-                                <p className="alert alert-danger">{this.state.error}</p>}
                             <div className="form-group">
                                 <input className="form-control"
                                     name="email"
@@ -140,7 +142,7 @@ class NavBar extends Component {
             <div>
                 <nav id="nav" className="navbar">
                     <Router>
-                        <div id="navLinks" className="container">
+                        <div className="container">
                             <span id="SiteName">ReciMe</span>
                             <Link className="link" to="/">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>
