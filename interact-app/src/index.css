@@ -12,7 +12,6 @@ h1 {
     text-align: center;
 }
 
-<<<<<<< HEAD
 .info-container {
     display: flex;
     margin: auto;
@@ -28,16 +27,13 @@ h1 {
     width: 80%;
 }
 
-.title {
-=======
 #SiteName {
->>>>>>> 839b42b394d774eb36f2bda9f112cfbae118b59d
+    position: relative;
     font-size: 30pt;
-    margin-left: -15%;
 }
 
-#signout {
-    margin-right: -5rem !important;
+#navLinks.container {
+    max-width: 95vw;
 }
 
 span, .link, .link:hover {
@@ -48,15 +44,15 @@ span, .link, .link:hover {
     background-color: rgb(19, 114, 131);
     padding: 10px;
     margin-bottom: 2rem;
+    width: 100vw;
 }
 
 .link {
     transition: 0.5s;
-    margin-right: -25% !important;
 }
 
 .container {
-    max-width: 80% !important;
+    margin: auto 0 !important;
 }
 
 .link:hover {
@@ -73,19 +69,19 @@ span, .link, .link:hover {
     text-align: center;
 }
 
-.ListItem {
-    margin-left: 2rem;
-}
-
 .form-control {
     width: 50% !important;
 }
 
-#AddButton {
-    margin: auto auto 1rem 2rem;
+#addBtn {
+    margin: auto !important;
 }
 
-#authentication {
+#delBtn, addBtn {
+    padding: 4px 10px;
+}
+
+#authentication, #recipeForm {
     text-align: center;
     border: 1px solid rgb(146, 145, 145);
     max-width: 450px;
@@ -131,4 +127,12 @@ i, h1.auth {
 
 #container {
     text-align: center;
+}
+
+#recipeForm button {
+    margin: 2rem auto;
+}
+
+#recipeForm {
+    max-width: 50%;
 }

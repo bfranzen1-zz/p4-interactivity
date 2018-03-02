@@ -142,21 +142,12 @@ class NavBar extends Component {
             <div>
                 <nav id="nav" className="navbar">
                     <Router>
-                        <div className="container">
-<<<<<<< HEAD
-                            <span className="title">ReciMe</span>
-                            <Link className="link" to="/">Home</Link>
-                            <Link className="link" to="/userRecipes">My Recipes</Link>
-                            <Link className="link" to="/Recipes">Explore</Link>
-                            <Link className="link" to="/Account">Account</Link>
-                            <button id="signout" className="btn btn-warning mr-2" onClick={() => this.signOut()}>
-=======
+                        <div id="navLinks" className="container">
                             <span id="SiteName">ReciMe</span>
                             <Link className="link" to="/">My Recipes</Link>
                             <Link className="link" to="/Recipes">Explore</Link>
                             <Link className="link" to="/Account">Account</Link>
                             <button id="signout" className="btn btn-warning mr-2" onClick={() => this.props.onSignOut()}>
->>>>>>> 839b42b394d774eb36f2bda9f112cfbae118b59d
                                 Sign Out
                             </button>
                         </div>
