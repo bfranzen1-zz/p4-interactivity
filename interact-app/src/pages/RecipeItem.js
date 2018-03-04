@@ -17,15 +17,13 @@ class RecipeItem extends Component {
         });
         change[panel] = true;
         this.setState(change);
-        
-        
     }
 
     render() {
         return (
             <div className="card" style={{ width: 18 + "rem" }}>
                 <div className="card-header">
-                    <h5 className="card-title">{this.props.recipe.creator + "'s " +  this.props.recipe.name}</h5>
+                    <h5 className="card-title">{this.props.recipe.creator + "'s " + this.props.recipe.name}</h5>
                     <ul className="nav nav-tabs card-header-tabs pull-right" id="myTab" role="tablist">
                         <li className="nav-item">
                             <a className={this.state.home ? "nav-link active" : "nav-link"} id="home-tab" name="home" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true" onClick={(event) => {
@@ -38,7 +36,7 @@ class RecipeItem extends Component {
                             }}>Profile</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                            <a onClick={() => this.props.select(this.props.recipe)} className="nav-link" id="contact-tab" data-toggle="tab" href="#recipe" role="tab" aria-controls="contact" aria-selected="false">Recipe</a>
                         </li>
                     </ul>
                 </div>
@@ -57,16 +55,16 @@ class HomeTab extends Component {
     render() {
         return (
             <div>
-                
-                <img className="card-img-top" src={this.props.recipe.imgLink} alt="Card image" />
-                
+
+                <img className="card-img-top" src={this.props.recipe.imgLink} alt="for Card" />
+
             </div>
 
         )
     }
 }
-        
-{/* <img classNameName="card-img-top" src={this.props.recipe.imgLink} alt={this.props.recipe.name + " visual"} /> */}
+
+{/* <img classNameName="card-img-top" src={this.props.recipe.imgLink} alt={this.props.recipe.name + " visual"} /> */ }
 {/* <h5 classNameName="card-title">{this.props.recipe.name}</h5>
     <p classNameName="card-text">{this.props.recipe.ingredients}</p>
     <p classNameName="card-text">{this.props.recipe.steps}</p>

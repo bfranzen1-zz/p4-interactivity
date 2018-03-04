@@ -90,7 +90,7 @@ class Account extends Component {
             }).catch((error) => {
                 console.log(error);
                 this.setState({ error: error.message })
-                if (error.code == 'auth/requires-recent-login') {
+                if (error.code === 'auth/requires-recent-login') {
                     this.toggleAuthenticating()
                 }
             });
@@ -109,7 +109,6 @@ class Account extends Component {
 
     render() {
         let currentUser = firebase.auth().currentUser;
-        let type = '';
         return (
             <div>
                 <h1>Your Account</h1>

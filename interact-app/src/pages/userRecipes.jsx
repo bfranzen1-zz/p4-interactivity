@@ -111,14 +111,38 @@ class UserRecipes extends Component {
 }
 
 class RecipeForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isValid: true
+        }
+    }
+
+    checkValid() {
+        let form = document.querySelectorAll("#RecipeForm input");
+        let array = Object.keys(form).map((d) => {
+            if (form[d].value.length < 1) {
+                return false;
+            }
+        })
+        let valid = !Object.values(array).includes(false);
+        if (!valid) {
+            this.setState({ isValid: false });
+        } else {
+            this.props.addRecipe();
+        }
+    }
+
     render() {
         return (
             <div id="RecipeForm" className="center-block">
+                {!this.state.isValid &&
+                    <p className="alert alert-danger">Please fill out the entire form!</p>}
                 <div className="form-group">
                     <input placeholder="Recipe Name" type="text" className="form-control" id="recipeName" name="name" onChange={(event) => { this.props.updateForm(event) }} />
                 </div>
                 <div className="form-group">
-                    <input placeholder="Image of Food" type="text" className="form-control" id="img" name="imgLink" onChange={(event) => { this.props.updateForm(event) }} />
+                    <input placeholder="Image Url of Food" type="text" className="form-control" id="img" name="imgLink" onChange={(event) => { this.props.updateForm(event) }} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="ingredients">Ingredients List:</label>
@@ -128,7 +152,7 @@ class RecipeForm extends Component {
                     <label htmlFor="steps">Recipe steps:</label>
                     <List type="Step" removeItem={(type) => this.props.remove(type)} update={(event, type) => { this.props.updateList(type, event) }} />
                 </div>
-                <button className="btn btn-primary" onClick={() => this.props.addRecipe()}>Post Your Recipe!</button>
+                <button className="btn btn-primary" onClick={() => this.checkValid()}>Post Your Recipe!</button>
             </div>
         )
     }

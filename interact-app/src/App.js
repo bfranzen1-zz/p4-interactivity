@@ -5,15 +5,18 @@ import UserRecipes from './pages/userRecipes.jsx';
 import Recipes from './pages/Recipes.jsx';
 import Account from './pages/account.jsx';
 import firebase from 'firebase';
-import logo from './icon3.png';
+import Recipe from './pages/Recipe.jsx';
 import 'font-awesome/css/font-awesome.min.css';
+
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
             password: '',
-            username: ''
+            username: '',
+            recipe: {}
         }
     }
 
@@ -43,6 +46,12 @@ class App extends Component {
         this.setState(change);
     }
 
+    select(recipe) {
+        this.setState({
+            recipe: recipe
+        })
+    }
+
     onSignUp() {
         firebase.auth().createUserWithEmailAndPassword(this.state.email,
             this.state.password).then(User => {
@@ -66,9 +75,9 @@ class App extends Component {
     }
 
     render() {
-        return (<div>
+        return (<div id="page">
             {this.state.user &&
-                <NavBar onSignOut={this.onSignOut} user={this.state.user} />
+                <NavBar recipe={this.state.recipe} select={(recipe) => this.select(recipe)} onSignOut={this.onSignOut} user={this.state.user} />
             }
             {!this.state.user &&
                 <div id="background">
@@ -155,13 +164,13 @@ class NavBar extends Component {
                 <Router>
                     <div>
                         <Route exact path='/' render={() => <UserRecipes user={this.props.user} />} />
-                        <Route path='/Recipes' render={() => <Recipes user={this.props.user} />} />
+                        <Route path='/Recipes' render={() => <Recipes select={(recipe) => this.props.select(recipe)} user={this.props.user} />} />
                         <Route path='/Account' render={() => <Account user={this.props.user} />} />
+                        <Route path='/recipe' render={() => <Recipe recipe={this.props.recipe} />} />
                     </div>
                 </Router>
             </div>
         )
     }
 }
-
 export default App;

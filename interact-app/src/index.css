@@ -12,6 +12,10 @@ h1 {
     text-align: center;
 }
 
+html, #root {
+    background-color: azure;
+}
+
 .info-container {
     display: flex;
     margin: auto;
@@ -73,9 +77,9 @@ span, .link, .link:hover {
 
 #nav {
     background-color: rgb(19, 114, 131);
-    padding: 10px;
+    padding: 10px 0px 10px 10px;
     margin-bottom: 2rem;
-    width: 100vw;
+    width: 100%;
 }
 
 .link {
@@ -169,7 +173,72 @@ i, h1.auth {
 }
 
 #recipeForm {
-    margin-top: 8rem;
+    margin: 6rem auto 4rem auto;
+}
+
+img.recipe {
+    max-width: 70%;
+    display: block;
+    margin: 2rem auto;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+h1.recipe {
+    font-size: 50pt;
+}
+
+h2.recipe {
+    margin: 2rem;
+    text-align: center;
+}
+
+.list-group {
+    text-align: center;
+}
+
+.list-group-item {
+    width: 50%;
+}
+
+li:not(.list-group-item) {
+    list-style-type: none;
+    margin: 1rem 0rem;
+}
+
+div.box {
+    display: inline;
+    border: 1px solid black;
+    margin: 1rem 15vw;
+    border-radius: 4px;
+    width: 70%;
+    float: left;
+    padding: 10px;
+    background-color: rgb(252, 247, 247);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+h3.box {
+    font-size: 20pt;
+}
+
+h4.box {
+    font-size: 12pt;
+    margin-bottom: 1rem;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+p.box {
+    word-wrap: break-word;
+}
+
+button#comment {
+    margin: 0.5rem 15vw;
+}
+
+.form-group>textarea.form-control {
+    margin-left: 15vw;
 }
 
 @media(min-width: 700px) {
