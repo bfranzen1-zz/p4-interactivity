@@ -82,7 +82,7 @@ class App extends Component {
             {!this.state.user &&
                 <div id="background">
                     <div id="container">
-                        <i className="fa fa-cutlery"></i>
+                        <i id="icon" className="fa fa-cutlery"></i>
                         <h1 className="auth">Log in to ReciMe!</h1>
                         <div id="authentication">
                             {this.state.error &&
@@ -163,7 +163,7 @@ class NavBar extends Component {
                 </nav>
                 <Router>
                     <div>
-                        <Route exact path='/' render={() => <UserRecipes user={this.props.user} />} />
+                        <Route exact path='/' render={() => <UserRecipes select={(recipe) => this.props.select(recipe)} user={this.props.user} />} />
                         <Route path='/Recipes' render={() => <Recipes select={(recipe) => this.props.select(recipe)} user={this.props.user} />} />
                         <Route path='/Account' render={() => <Account user={this.props.user} />} />
                         <Route path='/recipe' render={() => <Recipe recipe={this.props.recipe} />} />

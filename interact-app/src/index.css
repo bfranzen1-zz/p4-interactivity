@@ -42,9 +42,17 @@ html, #root {
     column-count: 1 !important;
 }
 
+.nav-link:last-of-type {
+    color: black;
+}
+
 .card {
+    background-color: aliceblue !important;
+}
+
+.card {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     margin: 2rem 12% auto auto;
-    background-color: rgb(16, 115, 202);
 }
 
 #try-again {
@@ -140,10 +148,21 @@ input {
     margin: auto !important;
 }
 
-i {
+i#icon {
     color: rgb(72, 168, 237);
     font-size: 85px !important;
     position: relative;
+}
+
+i#like {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    font-size: 25pt;
+    display: inline;
+    margin-left: 1.2rem;
+}
+
+i#like.clicked {
+    color: red;
 }
 
 h1.auth {
@@ -216,7 +235,6 @@ li:not(.list-group-item) {
 }
 
 div.box {
-    display: inline;
     border: 1px solid black;
     margin: 1rem 15vw;
     border-radius: 4px;

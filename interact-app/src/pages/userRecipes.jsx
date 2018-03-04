@@ -105,16 +105,10 @@ class UserRecipes extends Component {
                     </button>
                     {!this.state.isHidden && <RecipeForm updateList={(event, type) => this.updateList(type, event)}
                         addRecipe={() => this.addRecipe()} updateForm={(event) => this.updateForm(event)}
-                        remove={(type) => this.removeItem(type)} 
+                        remove={(type) => this.removeItem(type)}
                         updateCategory={(event) => this.updateCategory(event)} />}
-                    {recipeArray.map((d, i) => {
-                        return <div key={'link-' + i}>
-                            {d.name}
-                        </div>
-                    })}
-
                 </div>
-                <RecipesList deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
+                <RecipesList disabled="true" select={(recipe) => this.props.select(recipe)} deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
             </div>
         )
     }

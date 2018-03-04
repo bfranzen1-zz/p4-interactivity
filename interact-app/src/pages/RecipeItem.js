@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import '../index.css';
 import firebase from 'firebase';
-var FontAwesome = require('react-fontawesome');
+//var FontAwesome = require('react-font-awesome');
+import 'font-awesome/css/font-awesome.min.css';
 
 class RecipeItem extends Component {
     constructor() {
         super();
         this.state = {
             home: true,
-            profile: false
+            profile: false,
+            likeable: true
         };
     }
 
@@ -22,13 +24,17 @@ class RecipeItem extends Component {
     }
 
     likeRecipe() {
-        let recipeRef = firebase.database().ref('recipes/' + this.props.recipe.key + '/likes');
-        recipeRef.transaction(function (currentClicks) {
-            return (currentClicks || 0) + 1;
-        });
+        if (this.state.likeable) {
+            this.setState({ likeable: false });
+            let recipeRef = firebase.database().ref('recipes/' + this.props.recipe.key + '/likes');
+            recipeRef.transaction(function (currentClicks) {
+                return (currentClicks || 0) + 1;
+            });
+        }
     }
 
     render() {
+        console.log(this.props.disabled);
         return (
             <div className="card" style={{ width: 18 + "rem" }}>
                 <div className="card-header bg-info">
@@ -37,7 +43,9 @@ class RecipeItem extends Component {
                             <h5 className="card-title">{this.props.recipe.creator + "'s " + this.props.recipe.name}</h5>{'    '}
                         </div>
                         <div>
-                            <FontAwesome onClick={() => this.likeRecipe()}  className='super' name='heart' size='lg' style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
+                            {!this.props.disabled &&
+                                <i onClick={() => this.likeRecipe()} id="like" className={this.state.likeable ? "fa fa-heart" : "fa fa-heart clicked"}></i>
+                            }
                         </div>
                     </div>
                     <ul className="nav nav-tabs card-header-tabs pull-right" id="myTab" role="tablist">
