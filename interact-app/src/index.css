@@ -40,6 +40,7 @@ h1 {
 
 .card {
     margin: 2rem 12% auto auto;
+    background-color: rgb(16, 115, 202);
 }
 
 #try-again {
@@ -166,6 +167,14 @@ i, h1.auth {
 
 #recipeForm button {
     margin: 2rem auto;
+}
+
+.card-title-header {
+    display: flex;
+}
+
+.super {
+    text-align: right;
 }
 
 #recipeForm {

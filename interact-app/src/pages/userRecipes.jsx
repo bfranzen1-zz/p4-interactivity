@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { RecipesList } from './RecipesList';
 
+
 class UserRecipes extends Component {
     constructor() {
         super();
@@ -12,6 +13,7 @@ class UserRecipes extends Component {
             name: '',
             imgLink: '',
             creator: '',
+            category: '',
             ingredients: [],
             steps: []
         };
@@ -67,7 +69,8 @@ class UserRecipes extends Component {
             creator: this.props.user.displayName,
             ingredients: this.state.ingredients,
             steps: this.state.steps,
-            user: this.props.user.uid
+            user: this.props.user.uid,
+            likes: 0
         };
         this.toggleHidden();
         this.requestRef.push(recipe);
@@ -87,7 +90,6 @@ class UserRecipes extends Component {
                 recipe.key = key;
                 return recipe;
             }).filter((d) => {
-                console.log(firebase.auth().currentUser);
                 return d.user === firebase.auth().currentUser.uid;
             });
         }
@@ -95,7 +97,7 @@ class UserRecipes extends Component {
             <div>
                 <h1>Welcome, {this.props.user.displayName}!</h1>
                 <p className="info">Look at the recipes you've made, click on them to see likes, comments and
-                    other data! Create new Recipes here too.
+                    other information! Create new Recipes here too.
                 </p>
                 <div id="recipeForm">
                     <button id="makeRecipe" onClick={() => this.toggleHidden()} className={this.state.creating ? "btn btn-warning" : "btn btn-primary"}>
@@ -103,7 +105,8 @@ class UserRecipes extends Component {
                     </button>
                     {!this.state.isHidden && <RecipeForm updateList={(event, type) => this.updateList(type, event)}
                         addRecipe={() => this.addRecipe()} updateForm={(event) => this.updateForm(event)}
-                        remove={(type) => this.removeItem(type)} />}
+                        remove={(type) => this.removeItem(type)} 
+                        updateCategory={(event) => this.updateCategory(event)} />}
                     {recipeArray.map((d, i) => {
                         return <div key={'link-' + i}>
                             {d.name}
@@ -119,6 +122,10 @@ class UserRecipes extends Component {
 
 class RecipeForm extends Component {
     render() {
+        const options = [
+            'one', 'two', 'three'
+        ]
+        const defaultOption = options[0];
         return (
             <div id="RecipeForm" className="center-block">
                 <div className="form-group">

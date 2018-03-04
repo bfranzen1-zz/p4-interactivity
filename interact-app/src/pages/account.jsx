@@ -31,8 +31,12 @@ class Account extends Component {
     }
 
     toggleSuccess() {
+        if(this.state.error) {
+            this.setState({error: !this.state.error})
+        }
         this.setState({
             success: !this.state.success
+            
         })
     }
 
