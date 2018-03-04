@@ -35,8 +35,8 @@ class Recipes extends Component {
         }
         return (
             <div>
-                <h1>Recipes Page</h1>
-                <RecipesList deleteRecipe={(key) => this.props.deleteRecipe(key)} recipeArray={recipeArray} />
+                <h1>User Recipes</h1>
+                <RecipesList select={(recipe) => this.props.select(recipe)} deleteRecipe={(key) => this.props.deleteRecipe(key)} recipeArray={recipeArray} />
             </div>
         )
     }
