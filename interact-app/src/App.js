@@ -47,6 +47,8 @@ class App extends Component {
         this.setState(change);
     }
 
+    //sets the state of recipe based on the recipe parameter
+    //used for displaying recipe page of what user clicked on 
     select(recipe) {
         this.setState({
             recipe: recipe
