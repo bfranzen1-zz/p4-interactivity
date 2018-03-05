@@ -8,7 +8,7 @@ class RecipesList extends Component {
             <div className="card-deck">
                 {this.props.recipeArray.map((d, i) => {
                     return <div key={'link-' + i}>
-                        <RecipeItem select={(recipe) => this.props.select(recipe)} deleteRecipe={(key) => this.props.deleteRecipe(key)} recipe={d} />
+                        <RecipeItem userRecipe={this.props.userRecipe} select={(recipe) => this.props.select(recipe)} deleteRecipe={(key) => this.props.deleteRecipe(key)} recipe={d} />
                     </div>
                 })}
             </div>

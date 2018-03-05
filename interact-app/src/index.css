@@ -16,6 +16,14 @@ html, #root {
     background-color: azure;
 }
 
+.delete-button {
+    text-align: center
+}
+
+.info-text {
+    margin-bottom: .5px;
+}
+
 .info-container {
     display: flex;
     margin: auto;
@@ -34,6 +42,10 @@ html, #root {
 .top-form {
     padding-top: 10px;
     margin-bottom: 0px;
+}
+
+.info-tab {
+    text-align: center;
 }
 
 .card-deck {

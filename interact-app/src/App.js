@@ -38,6 +38,7 @@ class App extends Component {
         })
     }
 
+    // Updates the given value in the state
     onChange(event) {
         let val = event.target.value;
         let field = event.target.name;

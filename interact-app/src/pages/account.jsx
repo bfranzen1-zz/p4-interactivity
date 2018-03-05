@@ -17,19 +17,22 @@ class Account extends Component {
             authenticating: false
         };
     }
-
+    // Toggles the form for changing a user's display name
     toggleName() {
         this.setState({
             userNameHidden: !this.state.userNameHidden
         });
     }
 
+    // Toggles the form for changing a user's password
     toggleEmail() {
         this.setState({
             emailHidden: !this.state.emailHidden
         });
     }
 
+    // Toggles a succcess notification to be shown above form upon
+    // successful information change
     toggleSuccess() {
         if(this.state.error) {
             this.setState({error: !this.state.error})
@@ -40,12 +43,14 @@ class Account extends Component {
         })
     }
 
+    // Toggles the re-authentication form
     toggleAuthenticating() {
         this.setState({
             authenticating: !this.state.authenticating
         });
     }
 
+    // Updates values held in the state
     updateValue(event) {
         let val = event.target.value;
         let field = event.target.name;
@@ -54,6 +59,7 @@ class Account extends Component {
         this.setState(change);
     }
 
+    // Reauthenticates the current user
     reAuth(email, password) {
         let currentUser = firebase.auth().currentUser;
         let credential = firebase.auth.EmailAuthProvider.credential(
@@ -68,6 +74,7 @@ class Account extends Component {
         });
     }
 
+    // Updates the given user information(email or displayname)
     updateUser(event, credential) {
         this.setState({
             success: false
@@ -179,6 +186,7 @@ class Account extends Component {
 }
 export default Account
 
+// Form for changing either email or displayname
 class UpdateForm extends Component {
     render() {
         let changeType = ''
