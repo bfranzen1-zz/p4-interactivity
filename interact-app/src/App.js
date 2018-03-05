@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import Recipe from './pages/Recipe.jsx';
 import 'font-awesome/css/font-awesome.min.css';
 
-
+//handles/shows react app 
 class App extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +20,7 @@ class App extends Component {
         }
     }
 
+    //handles setting state based on who is signed in 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(User => {
             if (User) {
@@ -52,6 +53,7 @@ class App extends Component {
         })
     }
 
+    //handles when user has signed up, sends user info to firebase
     onSignUp() {
         firebase.auth().createUserWithEmailAndPassword(this.state.email,
             this.state.password).then(User => {
@@ -63,6 +65,7 @@ class App extends Component {
             });
     }
 
+    //handles when user signs in, changes user information in state
     onSignIn() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .catch(err => {
@@ -70,10 +73,13 @@ class App extends Component {
             });
     }
 
+    //handles when user signs out, signs them out of firebase
     onSignOut() {
         firebase.auth().signOut();
     }
 
+    //renders app, shows navbar and myrecipes page if signed in, or authentication page
+    //if not
     render() {
         return (<div id="page">
             {this.state.user &&
@@ -132,19 +138,9 @@ class App extends Component {
     }
 }
 
-//Pages:
-//User Recipes
-//User Settings/account
-//recipes
-//signin/up/out
-//Home page (informational/how to use site)
-
+//class that shows/handles the navigation bar
 class NavBar extends Component {
-
-    signOut() {
-        firebase.auth().signOut();
-    }
-
+    //renders nav bar along with react router for navigation
     render() {
         return (
             <div>

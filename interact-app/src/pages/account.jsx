@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
-
+//class that handles/shows the account page 
 class Account extends Component {
 
     constructor() {
@@ -31,12 +31,12 @@ class Account extends Component {
     }
 
     toggleSuccess() {
-        if(this.state.error) {
-            this.setState({error: !this.state.error})
+        if (this.state.error) {
+            this.setState({ error: !this.state.error })
         }
         this.setState({
             success: !this.state.success
-            
+
         })
     }
 

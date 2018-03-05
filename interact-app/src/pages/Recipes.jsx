@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { RecipesList } from './RecipesList';
 
+//class that handles the explore page,
+//displays all recipes created by all users
 class Recipes extends Component {
     constructor() {
         super();
@@ -15,6 +17,7 @@ class Recipes extends Component {
         recipeRef.remove();
     }
 
+    //makes reference to firebase for recipes 
     componentDidMount() {
         this.requestRef = firebase.database().ref('recipes');
         this.requestRef.on('value', (snapshot) => {
@@ -23,6 +26,7 @@ class Recipes extends Component {
         });
     }
 
+    //renders all recipe cards to be displayed
     render() {
         let recipeArray = [];
         if (this.state.recipes) {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../index.css';
 import firebase from 'firebase';
-//var FontAwesome = require('react-font-awesome');
 import 'font-awesome/css/font-awesome.min.css';
 
+//class that handles/shows a recipe bootstrap card
 class RecipeItem extends Component {
     constructor() {
         super();
@@ -23,6 +23,8 @@ class RecipeItem extends Component {
         this.setState(change);
     }
 
+    //function that handles when a user clicks the heart icon 
+    //on a recipe card
     likeRecipe() {
         if (this.state.likeable) {
             this.setState({ likeable: false });
@@ -33,6 +35,8 @@ class RecipeItem extends Component {
         }
     }
 
+    //renders bootstrap card with information about that recipe,
+    //card has navigation that displays different information
     render() {
         console.log(this.props.disabled);
         return (
@@ -74,6 +78,7 @@ class RecipeItem extends Component {
     }
 }
 
+//class that handles what to show on the home tab of the bootstrap recipe card
 class HomeTab extends Component {
     render() {
         return (
@@ -85,11 +90,5 @@ class HomeTab extends Component {
         )
     }
 }
-
-{/* <img classNameName="card-img-top" src={this.props.recipe.imgLink} alt={this.props.recipe.name + " visual"} /> */ }
-{/* <h5 classNameName="card-title">{this.props.recipe.name}</h5>
-    <p classNameName="card-text">{this.props.recipe.ingredients}</p>
-    <p classNameName="card-text">{this.props.recipe.steps}</p>
-    <a onClick={() => this.props.deleteRecipe(this.props.recipe.key)} classNameName="btn btn-primary">Delete Recipe</a> */}
 
 export { RecipeItem };

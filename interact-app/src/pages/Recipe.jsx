@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import '../index.css';
 import firebase from 'firebase';
 
-
+//class that handles/shows what to display when a user clicks 
+//on the recipe tab of a recipe bootstrap card
 class Recipe extends Component {
     componentDidMount() {
+        //scrolls to top of page after user clicks on recipe tab 
         window.scrollTo(0, 0);
     }
 
+    //renders recipe information
     render() {
-        console.log(this.props.recipe);
         if (Object.keys(this.props.recipe).length > 0) {
-
             return (
                 <div>
                     <h1 className="recipe">{this.props.recipe.creator + "'s " + this.props.recipe.name}</h1>
@@ -40,6 +41,7 @@ class Recipe extends Component {
     }
 }
 
+//class that handles the commment section of each recipe page
 class CommentSection extends Component {
     constructor(props) {
         super(props);
@@ -49,6 +51,7 @@ class CommentSection extends Component {
         }
     }
 
+    //gets comments from firebase that reference this recipe specifically
     componentDidMount() {
         this.requestRef = firebase.database().ref('recipes/' + this.props.recipeRef + "/comments");
         this.requestRef.on('value', (snapshot) => {
@@ -58,6 +61,7 @@ class CommentSection extends Component {
         console.log(this.requestRef);
     }
 
+    //updates state of comment being written 
     updateComment(event) {
         let val = event.target.value;
         this.setState({
@@ -65,6 +69,7 @@ class CommentSection extends Component {
         });
     }
 
+    //adds comment to firebase and therefore react app
     addComment() {
         let comment = {
             name: firebase.auth().currentUser.displayName,
@@ -75,6 +80,7 @@ class CommentSection extends Component {
         this.setState({ newComment: "" });
     }
 
+    //renders comments to display
     render() {
         return (
             <div>
@@ -92,13 +98,13 @@ class CommentSection extends Component {
     }
 }
 
+//class that handles what information needs to be displayed about each comment
 class Comments extends Component {
     render() {
-        console.log(typeof this.props.comments);
         let comments = this.props.comments;
         return (
             <div>
-                {Object.keys(comments).map((d, i) => {
+                {comments && Object.keys(comments).map((d, i) => {
                     let date = new Date(comments[d].time);
                     return (
                         <div key={d + i} className="box">

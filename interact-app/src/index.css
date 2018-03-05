@@ -1,3 +1,9 @@
+/******************************/
+
+/* For Overall Page Style */
+
+/******************************/
+
 html {
     box-sizing: border-box;
 }
@@ -36,6 +42,12 @@ html, #root {
     margin-bottom: 0px;
 }
 
+/******************************/
+
+/*For Bootstrap card styling*/
+
+/******************************/
+
 .card-deck {
     margin-top: 1rem !important;
     column-gap: 1% !important;
@@ -55,6 +67,10 @@ html, #root {
     margin: 2rem 12% auto auto;
 }
 
+.card-title-header {
+    display: flex;
+}
+
 #try-again {
     padding-bottom: 5px !important;
 }
@@ -71,6 +87,12 @@ html, #root {
 .alert {
     text-align: center;
 }
+
+/******************************/
+
+/*For navbar*/
+
+/******************************/
 
 #SiteName {
     display: none;
@@ -107,6 +129,12 @@ span, .link, .link:hover {
 .container {
     margin: auto 0 !important;
 }
+
+/******************************/
+
+/*For forms*/
+
+/******************************/
 
 .info {
     margin: 2rem auto;
@@ -148,6 +176,12 @@ input {
     margin: auto !important;
 }
 
+/******************************/
+
+/*Font-awesome icons*/
+
+/******************************/
+
 i#icon {
     color: rgb(72, 168, 237);
     font-size: 85px !important;
@@ -156,7 +190,7 @@ i#icon {
 
 i#like {
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    font-size: 25pt;
+    font-size: 22pt;
     display: inline;
     margin-left: 1.2rem;
 }
@@ -192,13 +226,15 @@ i, h1.auth {
     margin: 2rem auto;
 }
 
-.card-title-header {
-    display: flex;
-}
-
 .super {
     text-align: right;
 }
+
+/******************************/
+
+/* For individual recipe pages */
+
+/******************************/
 
 #recipeForm {
     margin: 6rem auto 4rem auto;
@@ -267,6 +303,12 @@ button#comment {
 .form-group>textarea.form-control {
     margin-left: 15vw;
 }
+
+/******************************/
+
+/*For Responsive Site */
+
+/******************************/
 
 @media(min-width: 700px) {
     #SiteName {
