@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import Recipe from './pages/Recipe.jsx';
 import 'font-awesome/css/font-awesome.min.css';
 
-
+//handles/shows react app 
 class App extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +20,7 @@ class App extends Component {
         }
     }
 
+    //handles setting state based on who is signed in 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(User => {
             if (User) {
@@ -53,6 +54,7 @@ class App extends Component {
         })
     }
 
+    //handles when user has signed up, sends user info to firebase
     onSignUp() {
         firebase.auth().createUserWithEmailAndPassword(this.state.email,
             this.state.password).then(User => {
@@ -64,6 +66,7 @@ class App extends Component {
             });
     }
 
+    //handles when user signs in, changes user information in state
     onSignIn() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .catch(err => {
@@ -71,10 +74,13 @@ class App extends Component {
             });
     }
 
+    //handles when user signs out, signs them out of firebase
     onSignOut() {
         firebase.auth().signOut();
     }
 
+    //renders app, shows navbar and myrecipes page if signed in, or authentication page
+    //if not
     render() {
         return (<div id="page">
             {this.state.user &&
@@ -83,7 +89,7 @@ class App extends Component {
             {!this.state.user &&
                 <div id="background">
                     <div id="container">
-                        <i className="fa fa-cutlery"></i>
+                        <i id="icon" className="fa fa-cutlery"></i>
                         <h1 className="auth">Log in to ReciMe!</h1>
                         <div id="authentication">
                             {this.state.error &&
@@ -133,19 +139,9 @@ class App extends Component {
     }
 }
 
-//Pages:
-//User Recipes
-//User Settings/account
-//recipes
-//signin/up/out
-//Home page (informational/how to use site)
-
+//class that shows/handles the navigation bar
 class NavBar extends Component {
-
-    signOut() {
-        firebase.auth().signOut();
-    }
-
+    //renders nav bar along with react router for navigation
     render() {
         return (
             <div>
@@ -164,7 +160,7 @@ class NavBar extends Component {
                 </nav>
                 <Router>
                     <div>
-                        <Route exact path='/' render={() => <UserRecipes user={this.props.user} />} />
+                        <Route exact path='/' render={() => <UserRecipes select={(recipe) => this.props.select(recipe)} user={this.props.user} />} />
                         <Route path='/Recipes' render={() => <Recipes select={(recipe) => this.props.select(recipe)} user={this.props.user} />} />
                         <Route path='/Account' render={() => <Account user={this.props.user} />} />
                         <Route path='/recipe' render={() => <Recipe recipe={this.props.recipe} />} />

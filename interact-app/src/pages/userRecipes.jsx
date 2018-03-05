@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { RecipesList } from './RecipesList';
 
-
+//class that handles/displays recipes that the 
+//current user has created
 class UserRecipes extends Component {
     constructor() {
         super();
@@ -19,13 +20,15 @@ class UserRecipes extends Component {
         };
     }
 
+    //toggles whether recipe form should be hidden
     toggleHidden() {
         this.setState({
             isHidden: !this.state.isHidden,
             creating: !this.state.creating
         });
     }
-
+    //on component mount reference to recipes object
+    //in firebase created and recipes state is set to that object
     componentDidMount() {
         this.requestRef = firebase.database().ref('recipes');
         this.requestRef.on('value', (snapshot) => {
@@ -34,6 +37,8 @@ class UserRecipes extends Component {
         });
     }
 
+    //sets state of field that is passed from the event
+    //to the passed value
     updateForm(event) {
         let val = event.target.value;
         let field = event.target.name;
@@ -42,6 +47,8 @@ class UserRecipes extends Component {
         this.setState(change);
     }
 
+    //updates the state of type of list (ingredient || step) based
+    //on value passed from event.
     updateList(type, event) {
         let val = event.target.value;
         let num = event.target.name.slice(-1);
@@ -56,12 +63,16 @@ class UserRecipes extends Component {
         }
     }
 
+    //removes input element from recipe form based on 
+    //list type (ingredient || step)
     removeItem(type) {
         type === "Ingredient" ?
             this.state.ingredients.pop() :
             this.state.steps.pop();
     }
 
+    //adds recipe to firebase,
+    //all recipe form information passed
     addRecipe() {
         let recipe = {
             name: this.state.name,
@@ -77,21 +88,24 @@ class UserRecipes extends Component {
         this.requestRef.push(recipe);
     }
 
+    //deletes the recipe from firebase and therefore react app
     deleteRecipe(key) {
         let recipeRef = firebase.database().ref('recipes/' + key)
         recipeRef.remove();
     }
 
+    //renders content needed to display user recipes and gives them the ability
+    //to upload new recipes
     render() {
         let isUserRecipe = true;
         let recipeArray = [];
-        if (this.state.recipes) {
+        if (this.state.recipes) { //if there are any recipes
             let recipeKeys = Object.keys(this.state.recipes);
             recipeArray = recipeKeys.map((key) => {
                 let recipe = this.state.recipes[key];
                 recipe.key = key;
                 return recipe;
-            }).filter((d) => {
+            }).filter((d) => { //only returns recipes made by current user
                 return d.user === firebase.auth().currentUser.uid;
             });
         }
@@ -107,21 +121,17 @@ class UserRecipes extends Component {
                     </button>
                     {!this.state.isHidden && <RecipeForm updateList={(event, type) => this.updateList(type, event)}
                         addRecipe={() => this.addRecipe()} updateForm={(event) => this.updateForm(event)}
-                        remove={(type) => this.removeItem(type)} 
+                        remove={(type) => this.removeItem(type)}
                         updateCategory={(event) => this.updateCategory(event)} />}
-                    {recipeArray.map((d, i) => {
-                        return <div key={'link-' + i}>
-                            {d.name}
-                        </div>
-                    })}
-
                 </div>
-                <RecipesList userRecipe={isUserRecipe} deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
+                <RecipesList disabled="true" select={(recipe) => this.props.select(recipe)} userRecipe={isUserRecipe} deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
             </div>
         )
     }
 }
 
+//class that handles/shows the form that users can fill out to 
+//upload a recipe. Only shown if user has clicked "create a new recipe"
 class RecipeForm extends Component {
     constructor(props) {
         super(props);
@@ -130,6 +140,8 @@ class RecipeForm extends Component {
         }
     }
 
+    //checks if the user has filled out the entire form,
+    //displays error if they haven't and won't let them upload it
     checkValid() {
         let form = document.querySelectorAll("#RecipeForm input");
         let array = Object.keys(form).map((d) => {
@@ -145,11 +157,8 @@ class RecipeForm extends Component {
         }
     }
 
+    //renders recipe form 
     render() {
-        const options = [
-            'one', 'two', 'three'
-        ]
-        const defaultOption = options[0];
         return (
             <div id="RecipeForm" className="center-block">
                 {!this.state.isValid &&
@@ -174,6 +183,9 @@ class RecipeForm extends Component {
     }
 }
 
+//class that lets user fill out a list
+//of input elements. They can add or delete an input
+//box to make the list bigger/smaller
 class List extends Component {
     constructor(props) {
         super(props);
@@ -182,12 +194,14 @@ class List extends Component {
         }
     }
 
+    //increases input box count by 1
     add() {
         this.setState({
             count: this.state.count + 1
         })
     }
 
+    //decreases input box count by 1
     delete() {
         this.props.removeItem(this.props.type);
         this.setState({
@@ -195,8 +209,10 @@ class List extends Component {
         })
     }
 
+    //renders the list based on count state 
     render() {
         let inputs = [];
+        //generates input box based on state count
         for (let i = 1; i <= this.state.count; i++) {
             inputs.push(<div className="ListItem" key={i}>
                 <input placeholder={i + "."} onChange={(event) => this.props.update(this.props.type, event)} key={"item" + i} type="text" className="form-control" name={this.props.type + i} />

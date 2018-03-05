@@ -1,34 +1,49 @@
 import React, { Component } from 'react';
 import '../index.css';
 import firebase from 'firebase';
-var FontAwesome = require('react-fontawesome');
+import 'font-awesome/css/font-awesome.min.css';
 
+//class that handles/shows a recipe bootstrap card
 class RecipeItem extends Component {
     constructor() {
         super();
         this.state = {
             about: true,
-            info: false
+            info: false,
+            likeable: true
         };
     }
 
     changePanel(panel) {
-        let change = this.state;
-        Object.keys(change).forEach((v) => {
-            change[v] = false;
-        });
-        change[panel] = true;
-        this.setState(change);
+        if(panel === 'about') {
+            this.setState({
+                about: true,
+                info: false
+            });
+        } else {
+            this.setState({
+                about:false,
+                info: true
+            });
+        }
     }
 
+    //function that handles when a user clicks the heart icon 
+    //on a recipe card
     likeRecipe() {
-        let recipeRef = firebase.database().ref('recipes/' + this.props.recipe.key + '/likes');
-        recipeRef.transaction(function (currentClicks) {
-            return (currentClicks || 0) + 1;
-        });
+        if (this.state.likeable) {
+            this.setState({ likeable: false });
+            let recipeRef = firebase.database().ref('recipes/' + this.props.recipe.key + '/likes');
+            recipeRef.transaction(function (currentClicks) {
+                return (currentClicks || 0) + 1;
+            });
+        }
     }
 
+    //renders bootstrap card with information about that recipe,
+    //card has navigation that displays different information
     render() {
+        console.log(this.props.disabled);
         return (
             <div className="card" style={{ width: 18 + "rem" }}>
                 <div className="card-header bg-info">
@@ -37,7 +52,9 @@ class RecipeItem extends Component {
                             <h5 className="card-title">{this.props.recipe.creator + "'s " + this.props.recipe.name}</h5>{'    '}
                         </div>
                         <div>
-                            <FontAwesome onClick={() => this.likeRecipe()}  className='super' name='heart' size='lg' style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
+                            {!this.props.disabled &&
+                                <i onClick={() => this.likeRecipe()} id="like" className={this.state.likeable ? "fa fa-heart" : "fa fa-heart clicked"}></i>
+                            }
                         </div>
                     </div>
                     <ul className="nav nav-tabs card-header-tabs pull-right" id="myTab" role="tablist">
@@ -97,10 +114,4 @@ class InfoTab extends Component {
         )
     }
 }
-{/* <img classNameName="card-img-top" src={this.props.recipe.imgLink} alt={this.props.recipe.name + " visual"} /> */ }
-{/* <h5 classNameName="card-title">{this.props.recipe.name}</h5>
-    <p classNameName="card-text">{this.props.recipe.ingredients}</p>
-    <p classNameName="card-text">{this.props.recipe.steps}</p>
-    <a onClick={() => this.props.deleteRecipe(this.props.recipe.key)} classNameName="btn btn-primary">Delete Recipe</a> */}
-
 export { RecipeItem };

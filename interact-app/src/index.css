@@ -1,3 +1,9 @@
+/******************************/
+
+/* For Overall Page Style */
+
+/******************************/
+
 html {
     box-sizing: border-box;
 }
@@ -47,6 +53,11 @@ html, #root {
 .info-tab {
     text-align: center;
 }
+/******************************/
+
+/*For Bootstrap card styling*/
+
+/******************************/
 
 .card-deck {
     margin-top: 1rem !important;
@@ -54,9 +65,21 @@ html, #root {
     column-count: 1 !important;
 }
 
+.nav-link:last-of-type {
+    color: black;
+}
+
 .card {
+    background-color: aliceblue !important;
+}
+
+.card {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     margin: 2rem 12% auto auto;
-    background-color: rgb(16, 115, 202);
+}
+
+.card-title-header {
+    display: flex;
 }
 
 #try-again {
@@ -75,6 +98,12 @@ html, #root {
 .alert {
     text-align: center;
 }
+
+/******************************/
+
+/*For navbar*/
+
+/******************************/
 
 #SiteName {
     display: none;
@@ -111,6 +140,12 @@ span, .link, .link:hover {
 .container {
     margin: auto 0 !important;
 }
+
+/******************************/
+
+/*For forms*/
+
+/******************************/
 
 .info {
     margin: 2rem auto;
@@ -152,10 +187,27 @@ input {
     margin: auto !important;
 }
 
-i {
+/******************************/
+
+/*Font-awesome icons*/
+
+/******************************/
+
+i#icon {
     color: rgb(72, 168, 237);
     font-size: 85px !important;
     position: relative;
+}
+
+i#like {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    font-size: 22pt;
+    display: inline;
+    margin-left: 1.2rem;
+}
+
+i#like.clicked {
+    color: red;
 }
 
 h1.auth {
@@ -185,13 +237,15 @@ i, h1.auth {
     margin: 2rem auto;
 }
 
-.card-title-header {
-    display: flex;
-}
-
 .super {
     text-align: right;
 }
+
+/******************************/
+
+/* For individual recipe pages */
+
+/******************************/
 
 #recipeForm {
     margin: 6rem auto 4rem auto;
@@ -228,7 +282,6 @@ li:not(.list-group-item) {
 }
 
 div.box {
-    display: inline;
     border: 1px solid black;
     margin: 1rem 15vw;
     border-radius: 4px;
@@ -261,6 +314,12 @@ button#comment {
 .form-group>textarea.form-control {
     margin-left: 15vw;
 }
+
+/******************************/
+
+/*For Responsive Site */
+
+/******************************/
 
 @media(min-width: 700px) {
     #SiteName {

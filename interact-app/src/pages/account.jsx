@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
-
+//class that handles/shows the account page 
 class Account extends Component {
 
     constructor() {
@@ -34,12 +34,12 @@ class Account extends Component {
     // Toggles a succcess notification to be shown above form upon
     // successful information change
     toggleSuccess() {
-        if(this.state.error) {
-            this.setState({error: !this.state.error})
+        if (this.state.error) {
+            this.setState({ error: !this.state.error })
         }
         this.setState({
             success: !this.state.success
-            
+
         })
     }
 
