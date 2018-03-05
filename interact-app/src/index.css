@@ -22,6 +22,14 @@ html, #root {
     background-color: azure;
 }
 
+.delete-button {
+    text-align: center
+}
+
+.info-text {
+    margin-bottom: .5px;
+}
+
 .info-container {
     display: flex;
     margin: auto;
@@ -42,6 +50,9 @@ html, #root {
     margin-bottom: 0px;
 }
 
+.info-tab {
+    text-align: center;
+}
 /******************************/
 
 /*For Bootstrap card styling*/

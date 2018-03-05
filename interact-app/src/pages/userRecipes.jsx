@@ -81,7 +81,8 @@ class UserRecipes extends Component {
             ingredients: this.state.ingredients,
             steps: this.state.steps,
             user: this.props.user.uid,
-            likes: 0
+            likes: 0,
+            time: firebase.database.ServerValue.TIMESTAMP
         };
         this.toggleHidden();
         this.requestRef.push(recipe);
@@ -96,6 +97,7 @@ class UserRecipes extends Component {
     //renders content needed to display user recipes and gives them the ability
     //to upload new recipes
     render() {
+        let isUserRecipe = true;
         let recipeArray = [];
         if (this.state.recipes) { //if there are any recipes
             let recipeKeys = Object.keys(this.state.recipes);
@@ -122,7 +124,7 @@ class UserRecipes extends Component {
                         remove={(type) => this.removeItem(type)}
                         updateCategory={(event) => this.updateCategory(event)} />}
                 </div>
-                <RecipesList disabled="true" select={(recipe) => this.props.select(recipe)} deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
+                <RecipesList disabled="true" select={(recipe) => this.props.select(recipe)} userRecipe={isUserRecipe} deleteRecipe={(key) => this.deleteRecipe(key)} recipeArray={recipeArray} />
             </div>
         )
     }

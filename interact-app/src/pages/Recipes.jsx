@@ -28,6 +28,7 @@ class Recipes extends Component {
 
     //renders all recipe cards to be displayed
     render() {
+        let isUserRecipe = false;
         let recipeArray = [];
         if (this.state.recipes) {
             let recipeKeys = Object.keys(this.state.recipes);
@@ -40,7 +41,7 @@ class Recipes extends Component {
         return (
             <div>
                 <h1>User Recipes</h1>
-                <RecipesList select={(recipe) => this.props.select(recipe)} deleteRecipe={(key) => this.props.deleteRecipe(key)} recipeArray={recipeArray} />
+                <RecipesList userRecipe={isUserRecipe} select={(recipe) => this.props.select(recipe)} recipeArray={recipeArray} />
             </div>
         )
     }
